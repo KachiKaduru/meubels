@@ -18,17 +18,19 @@ export default function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          {/* PROTECTED ROUTES */}
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to={"home"} />} />
             <Route path="home" element={<Home />} />
-            <Route path="profile" element={<Profile />} />
             <Route path="favorites" element={<Favorite />} />
             <Route path="notifications" element={<Notifications />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
 
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<CheckOut />} />
           <Route path="product" element={<Product />} />
+
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="*" element={<PageNotFound />} />

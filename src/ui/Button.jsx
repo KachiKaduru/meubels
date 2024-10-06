@@ -29,13 +29,15 @@ const StyledButton = styled.button`
   font-family: "Poppins";
   text-align: center;
   border-radius: 1rem;
+  text-transform: capitalize;
+  cursor: pointer;
 
   ${(props) => lengths[props.cover]}
   ${(props) => paddings[props.padding]} 
   ${(props) => props.uppercase && uppercase}
 `;
 
-Button.defaultProps = {
+Button.defaaultProps = {
   cover: "full",
   padding: "medium",
 };
