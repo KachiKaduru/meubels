@@ -11,6 +11,7 @@ import AppLayout from "./ui/AppLayout";
 import GlobalStyles from "./styles/GlobalStyles";
 import Product from "./features/products/Product";
 import CheckOut from "./features/order/CheckOut";
+import Orders from "./features/user/Orders";
 
 export default function App() {
   return (

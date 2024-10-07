@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import backBtn from "../data/images/backBtn.svg";
+import styled from "styled-components";
 
-export default function BackButton() {
+const StyledBack = styled.div`
+  cursor: pointer;
+`;
+
+export default function BackButton({ className }) {
   const navigate = useNavigate();
 
   function handleReturn() {
@@ -9,8 +14,8 @@ export default function BackButton() {
   }
 
   return (
-    <div onClick={handleReturn}>
+    <StyledBack onClick={handleReturn} className={className}>
       <img src={backBtn} alt="" />
-    </div>
+    </StyledBack>
   );
 }

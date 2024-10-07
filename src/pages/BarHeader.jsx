@@ -12,6 +12,6 @@ const StyledBar = styled.div`
   padding: 4.5rem 0 1.4rem;
 `;
 
-export default function BarHeader({ children }) {
-  return <StyledBar>{children}</StyledBar>;
+export default function BarHeader({ children, className }) {
+  return <StyledBar className={className}>{children}</StyledBar>;
 }
