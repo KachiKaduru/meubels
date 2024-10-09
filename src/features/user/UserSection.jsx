@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import greaterThan from "../../data/images/g-than.svg";
 
-const StyledSection = styled(NavLink)`
+const StyledSection = styled(Link)`
   text-decoration: none;
   color: var(--primary-color);
   display: flex;

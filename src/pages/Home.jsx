@@ -1,30 +1,40 @@
 import styled from "styled-components";
 import CategoriesList from "../features/homepage/CategoriesList";
-import Header from "../features/homepage/Header";
 import ProductsDisplay from "../features/homepage/ProductsDisplay";
-import BarHeader from "./BarHeader";
+import BarHeader from "../ui/BarHeader";
 import SearchComponent from "../ui/SearchComponent";
 import CartComponent from "../ui/CartComponent";
+import Navbar from "../ui/Navbar";
+import Display from "../ui/Display";
+import Layout from "../ui/Layout";
 
 const StyledHome = styled.div`
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100dvh;
   /* overflow-y: scroll; */
 `;
 
 export default function Home() {
   return (
-    <StyledHome>
-      <BarHeader>
-        <SearchComponent />
-        <div>
-          <span>make home</span>
-          <p>beautiful</p>
-        </div>
-        <CartComponent />
-      </BarHeader>
-      {/* <Header /> */}
-      <CategoriesList />
+    <section>
+      <Layout>
+        <BarHeader>
+          <SearchComponent />
+          <div>
+            <span>make home</span>
+            <p>beautiful</p>
+          </div>
+          <CartComponent />
+        </BarHeader>
 
-      <ProductsDisplay />
-    </StyledHome>
+        <Display>
+          <CategoriesList />
+          <ProductsDisplay />
+        </Display>
+
+        <Navbar />
+      </Layout>
+    </section>
   );
 }

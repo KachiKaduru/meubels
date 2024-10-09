@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import BackButton from "../ui/BackButton";
 import Item from "../ui/Item";
-import BarHeader from "./BarHeader";
+import BarHeader from "../ui/BarHeader";
 import CartComponent from "../ui/CartComponent";
 import Display from "../ui/Display";
+import Layout from "../ui/Layout";
+import Navbar from "../ui/Navbar";
 
 const StyledFavorites = styled.div`
   display: flex;
@@ -20,18 +22,22 @@ const arr = [1, 2, 3, 4, 5, 6];
 
 export default function Favorite() {
   return (
-    <StyledFavorites>
-      <BarHeader>
-        <BackButton />
-        <span>Favorites</span>
-        <CartComponent />
-      </BarHeader>
+    <section>
+      <Layout>
+        <BarHeader>
+          <BackButton />
+          <span>Favorites</span>
+          <CartComponent />
+        </BarHeader>
 
-      <Display className="">
-        {arr.map((item) => (
-          <Item key={item} type={"favorites"} />
-        ))}
-      </Display>
-    </StyledFavorites>
+        <Display className="">
+          {arr.map((item) => (
+            <Item key={item} type={"favorites"} />
+          ))}
+        </Display>
+
+        <Navbar />
+      </Layout>
+    </section>
   );
 }

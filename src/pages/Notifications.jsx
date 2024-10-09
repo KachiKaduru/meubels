@@ -1,15 +1,23 @@
 import BackButton from "../ui/BackButton";
 import SearchComponent from "../ui/SearchComponent";
-import BarHeader from "./BarHeader";
+import BarHeader from "../ui/BarHeader";
+import Navbar from "../ui/Navbar";
+import Layout from "../ui/Layout";
+import Display from "../ui/Display";
 
 export default function Notifications() {
   return (
-    <div>
-      <BarHeader>
-        <BackButton />
-        <span>Notifications</span>
-        <SearchComponent />
-      </BarHeader>
-    </div>
+    <section>
+      <Layout>
+        <BarHeader>
+          <BackButton />
+          <span>Notifications</span>
+          <SearchComponent />
+        </BarHeader>
+
+        <Display></Display>
+        <Navbar />
+      </Layout>
+    </section>
   );
 }

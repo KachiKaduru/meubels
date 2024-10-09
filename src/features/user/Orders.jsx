@@ -1,4 +1,4 @@
-import BarHeader from "../../pages/BarHeader";
+import BarHeader from "../../ui/BarHeader";
 import BackButton from "../../ui/BackButton";
 
 export default function Orders() {

@@ -1,26 +1,21 @@
 import styled from "styled-components";
 import BackButton from "../ui/BackButton";
-import BarHeader from "./BarHeader";
+import BarHeader from "../ui/BarHeader";
 import Item from "../ui/Item";
 import Button from "../ui/Button";
+import Layout from "../ui/Layout";
+import Display from "../ui/Display";
 
-const arr = [1, 2, 3, 4, 5, 6];
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const StyledCart = styled.section`
-  padding: 0 2rem;
-  height: 100dvh;
+const Bottom = styled.footer`
+  padding: 1rem 0;
+  border: 1px solid green;
   display: grid;
-  grid-template-rows: auto 1fr auto;
-
-  .display {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    overflow: auto;
-  }
+  gap: 1rem;
 
   .total {
-    padding: 2rem;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
   }
@@ -28,25 +23,27 @@ const StyledCart = styled.section`
 
 export default function Cart() {
   return (
-    <StyledCart>
-      <BarHeader>
-        <BackButton />
-        <span>My cart</span>
-      </BarHeader>
+    <section>
+      <Layout>
+        <BarHeader>
+          <BackButton />
+          <span>My cart</span>
+        </BarHeader>
 
-      <div className="display">
-        {arr.map((item) => (
-          <Item key={item} type={"cart"} />
-        ))}
-      </div>
+        <Display>
+          {arr.map((item) => (
+            <Item key={item} type={"cart"} />
+          ))}
+        </Display>
 
-      <div className="bottom">
-        <aside className="total">
-          <p>Total: </p>
-          <p>$95.00 </p>
-        </aside>
-        <Button padding="large">Check out</Button>
-      </div>
-    </StyledCart>
+        <Bottom>
+          <aside className="total">
+            <p>Total: </p>
+            <p>$95.00 </p>
+          </aside>
+          <Button padding="large">Check out</Button>
+        </Bottom>
+      </Layout>
+    </section>
   );
 }

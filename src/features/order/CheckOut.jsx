@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BarHeader from "../../pages/BarHeader";
+import BarHeader from "../../ui/BarHeader";
 import BackButton from "../../ui/BackButton";
 import Button from "../../ui/Button";
 import ShippingAddress from "./ShippingAddress";
