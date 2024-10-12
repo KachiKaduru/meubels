@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import cartIcon from "../data/images/cartIcon.svg";
+import cartIcon from "../../data/images/cartIcon.svg";
 
 export default function CartComponent() {
   const navigate = useNavigate();

@@ -3,7 +3,7 @@ import CategoriesList from "../features/homepage/CategoriesList";
 import ProductsDisplay from "../features/homepage/ProductsDisplay";
 import BarHeader from "../ui/BarHeader";
 import SearchComponent from "../ui/SearchComponent";
-import CartComponent from "../ui/CartComponent";
+import CartComponent from "../features/cart/CartComponent";
 import Navbar from "../ui/Navbar";
 import Display from "../ui/Display";
 import Layout from "../ui/Layout";
