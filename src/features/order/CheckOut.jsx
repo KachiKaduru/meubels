@@ -3,6 +3,8 @@ import BarHeader from "../../ui/BarHeader";
 import BackButton from "../../ui/BackButton";
 import Button from "../../ui/Button";
 import ShippingAddress from "./ShippingAddress";
+import Display from "../../ui/Display";
+import Layout from "../../ui/Layout";
 
 const StyledCheckOut = styled.section`
   padding: 0 2rem 2rem;
@@ -17,19 +19,21 @@ const StyledCheckOut = styled.section`
 `;
 export default function CheckOut() {
   return (
-    <StyledCheckOut>
-      <BarHeader>
-        <BackButton />
-        <span>Check out</span>
-      </BarHeader>
+    <section>
+      <Layout>
+        <BarHeader>
+          <BackButton />
+          <span>Check out</span>
+        </BarHeader>
 
-      <div className="display">
-        <ShippingAddress />
-      </div>
+        <Display>
+          <ShippingAddress />
+        </Display>
 
-      <Button padding="large" uppercase>
-        Submit order
-      </Button>
-    </StyledCheckOut>
+        <Button padding="large" uppercase={true}>
+          Submit order
+        </Button>
+      </Layout>
+    </section>
   );
 }

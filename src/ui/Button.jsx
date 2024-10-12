@@ -37,12 +37,19 @@ const StyledButton = styled.button`
   ${(props) => props.uppercase && uppercase}
 `;
 
-Button.defaaultProps = {
+Button.defaultProps = {
   cover: "full",
   padding: "medium",
 };
 
-export default function Button({ children, cover = "full", padding = "medium", uppercase }) {
+// export default Button;
+
+export default function Button({
+  children,
+  cover = "full",
+  padding = "medium",
+  uppercase = false,
+}) {
   return (
     <StyledButton cover={cover} padding={padding} uppercase={uppercase}>
       {children}

@@ -7,7 +7,7 @@ import Display from "../../ui/Display";
 import CurrentQuantity from "../../ui/CurrentQuantity";
 
 const StyledProduct = styled.div`
-  padding: 2rem;
+  /* padding: 2rem; */
   display: grid;
   grid-template-rows: 1fr auto;
   height: 100dvh;
@@ -48,7 +48,7 @@ const StyledProduct = styled.div`
       border: 1px solid red;
       display: grid;
       place-content: center;
-      width: 6rem;
+      width: 7rem;
       border-radius: 1rem;
       /* background: var(--grey-color); */
 
