@@ -27,7 +27,7 @@ export default function Cart() {
       <Layout>
         <BarHeader>
           <BackButton />
-          <span>My cart</span>
+          <h4>My cart</h4>
         </BarHeader>
 
         <Display>

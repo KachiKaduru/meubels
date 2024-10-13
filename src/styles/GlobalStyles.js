@@ -8,6 +8,8 @@ const GlobalStyles = createGlobalStyle`
   --black-color: #303030;
   --grey-color: #909090;
   --disabled-color: #999999;
+
+  --tablet: 767px;
 }
 
 * {
@@ -23,12 +25,21 @@ html {
 
 body {
   font-size: 1.6rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   width: 37.5rem;
   /* min-width: 36rem; */
   /* max-width: 76.7rem; */
   margin: auto;
   border: 1px solid red;
+}
+
+nav{
+  /* background-color: green; */
+
+  /* @media (min-width: 767px) { */
+    /* grid-row: 1/-1; */
+    /* grid-column: 1/2; */
+  /* } */
 }
 
 

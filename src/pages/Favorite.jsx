@@ -26,7 +26,7 @@ export default function Favorite() {
       <Layout>
         <BarHeader>
           <BackButton />
-          <span>Favorites</span>
+          <h4>Favorites</h4>
           <CartComponent />
         </BarHeader>
 

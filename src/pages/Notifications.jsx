@@ -11,7 +11,7 @@ export default function Notifications() {
       <Layout>
         <BarHeader>
           <BackButton />
-          <span>Notifications</span>
+          <h4>Notifications</h4>
           <SearchComponent />
         </BarHeader>
 

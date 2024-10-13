@@ -10,6 +10,11 @@ const StyledBar = styled.div`
   z-index: 99;
   background-color: white;
   padding: 4.5rem 0 1.4rem;
+
+  h4 {
+    font-size: 1.6rem;
+    font-family: "Merriweather", serif;
+  }
 `;
 
 export default function BarHeader({ children, className }) {

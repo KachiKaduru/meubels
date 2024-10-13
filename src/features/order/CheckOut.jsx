@@ -23,7 +23,7 @@ export default function CheckOut() {
       <Layout>
         <BarHeader>
           <BackButton />
-          <span>Check out</span>
+          <h4>Check out</h4>
         </BarHeader>
 
         <Display>

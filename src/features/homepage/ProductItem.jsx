@@ -6,6 +6,8 @@ const StyledItem = styled.div`
     height: 20rem;
     width: 100%;
     border-radius: 1rem;
+    object-fit: cover;
+    object-position: top right;
   }
 
   div {

@@ -8,17 +8,32 @@ const StyledItem = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr 4rem;
   gap: 2rem;
-  border: 1px solid red;
 
-  img {
+  .imgContainer {
     width: 10rem;
     height: 10rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+    }
   }
 
   .other {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    span p {
+      color: var(--text-color);
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    span h4 {
+      color: var(--black-color);
+    }
   }
 
   aside {
@@ -62,7 +77,9 @@ const StyledItem = styled.div`
 export default function Item({ type = "cart" }) {
   return (
     <StyledItem>
-      <img src={img2} alt="" />
+      <div className="imgContainer">
+        <img src={img2} alt="" />
+      </div>
 
       <div className="other">
         <span>

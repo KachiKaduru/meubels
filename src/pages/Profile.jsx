@@ -22,7 +22,7 @@ export default function Profile() {
       <Layout>
         <BarHeader>
           <BackButton />
-          <span>Profile</span>
+          <h4>Profile</h4>
           <SearchComponent />
         </BarHeader>
 

@@ -9,6 +9,11 @@ const StyledUl = styled.ul`
   align-items: center;
   padding: 2rem 2rem 3rem;
   box-shadow: 0 -0.3rem 1rem 1px #ddd;
+
+  /* @media (min-width: 767px) { */
+  /* flex-direction: column; */
+  /* grid-column: 1/2; */
+  /* } */
 `;
 
 const StyledNavLink = styled(NavLink)`
