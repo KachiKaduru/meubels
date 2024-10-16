@@ -3,12 +3,22 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
   display: flex;
+  align-items: center;
   gap: 1rem;
 
+  span {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
   button {
-    width: 2.2rem;
+    width: 3rem;
+    height: 3rem;
     font-size: 2rem;
     text-align: center;
+    cursor: pointer;
+    border-radius: 0.6rem;
+    border: 1px solid #ddd;
   }
 `;
 
@@ -28,7 +38,7 @@ export default function CurrentQuantity() {
   return (
     <StyledDiv>
       <button onClick={handleDecrease}>-</button>
-      <span>{quantity}</span>
+      <span>0{quantity}</span>
       <button onClick={handleIncrease}>+</button>
     </StyledDiv>
   );

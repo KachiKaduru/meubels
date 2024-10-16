@@ -14,6 +14,7 @@ const StyledBar = styled.div`
   h4 {
     font-size: 1.6rem;
     font-family: "Merriweather", serif;
+    text-transform: capitalize;
   }
 `;
 

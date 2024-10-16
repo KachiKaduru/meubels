@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import img1 from "../../data/images/product-1.png";
+import { useNavigate } from "react-router-dom";
 
 const StyledItem = styled.div`
   img {
@@ -15,14 +16,21 @@ const StyledItem = styled.div`
   }
 `;
 
-export default function ProductItem() {
+export default function ProductItem({ item }) {
+  const { image, name, price } = item;
+  const navigate = useNavigate();
+
+  function handleProductDisplay() {
+    navigate("product/1");
+  }
+
   return (
-    <StyledItem>
-      <img src={img1} alt="" />
+    <StyledItem onClick={handleProductDisplay}>
+      <img src={image} alt="" />
 
       <div>
-        <p>Black Sample lamp</p>
-        <h4>$ 12.00</h4>
+        <p>{name}</p>
+        <h4>$ {price}</h4>
       </div>
     </StyledItem>
   );

@@ -20,6 +20,9 @@ const lengths = {
   half: css`
     width: 70%;
   `,
+  contain: css`
+    width: fit-content;
+  `,
 };
 
 const paddings = {
@@ -28,6 +31,9 @@ const paddings = {
   `,
   medium: css`
     padding: 1.3rem 0;
+  `,
+  small: css`
+    padding: 0.7rem 0;
   `,
 };
 
@@ -43,6 +49,7 @@ const uppercase = css`
 const StyledLink = styled(Link)`
   display: block;
   text-decoration: none;
+  font-size: 1.4rem;
 
   ${defaultStyles}
   ${(props) => lengths[props.cover]}

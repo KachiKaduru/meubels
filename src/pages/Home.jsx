@@ -1,5 +1,5 @@
+import { Outlet, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
-import CategoriesList from "../features/homepage/CategoriesList";
 import ProductsDisplay from "../features/homepage/ProductsDisplay";
 import BarHeader from "../ui/BarHeader";
 import SearchComponent from "../ui/SearchComponent";
@@ -7,30 +7,59 @@ import CartComponent from "../features/cart/CartComponent";
 import Navbar from "../ui/Navbar";
 import Display from "../ui/Display";
 import Layout from "../ui/Layout";
+import { getProducts, insertProducts } from "../services/apiProducts";
+import { shelvesArray } from "../data/productsArray";
 
-const StyledHome = styled.div`
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  height: 100dvh;
-  /* overflow-y: scroll; */
+const Div = styled.div`
+  font-family: "Gelasio", sans-serif;
+  font-size: 1.8rem;
+
+  p {
+    color: var(--grey-color);
+    text-transform: capitalize;
+  }
+
+  h3 {
+    text-transform: uppercase;
+  }
 `;
 
+export async function loader() {
+  const products = await getProducts();
+  return products;
+}
+
 export default function Home() {
+  const products = useLoaderData();
+
+  // const [products, setProducts] = useState([]);
+
+  // useEffect(function () {
+  //   getProducts().then((data) => {
+  //     console.log(data);
+  //     setProducts(data);
+  //   });
+  // }, []);
+
+  // function addObjects() {
+  //   insertProducts(shelvesArray);
+  // }
+
   return (
     <section>
       <Layout>
         <BarHeader>
           <SearchComponent />
-          <div>
-            <span>make home</span>
-            <p>beautiful</p>
-          </div>
+          <Div>
+            <p>make home</p>
+            <h3>beautiful</h3>
+          </Div>
           <CartComponent />
         </BarHeader>
-
+        {/* <button onClick={addObjects}>click me daddy!!!!!!!!!!!</button> */}
         <Display>
-          <CategoriesList />
-          <ProductsDisplay />
+          <Outlet />
+          <ProductsDisplay products={products} />
         </Display>
 
         <Navbar />

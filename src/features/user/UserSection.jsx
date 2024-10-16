@@ -10,15 +10,16 @@ const StyledSection = styled(Link)`
   align-items: center;
   padding: 1rem;
   border: 1px solid var(--disabled-color);
+  /* box-shadow: 0 0 1rem 0.1rem red; */
 
   h4 {
-    font-weight: 700;
     font-size: 1.8rem;
+    text-transform: capitalize;
   }
 
   p {
-    color: var(--text-color);
-    font-size: 1.4rem;
+    color: #808080;
+    font-size: 1.2rem;
   }
 `;
 

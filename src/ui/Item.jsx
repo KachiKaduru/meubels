@@ -8,6 +8,7 @@ const StyledItem = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr 4rem;
   gap: 2rem;
+  color: var(--primary-color);
 
   .imgContainer {
     width: 10rem;

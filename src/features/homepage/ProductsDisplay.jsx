@@ -11,13 +11,13 @@ const StyledDiv = styled.div`
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8];
 
-export default function ProductsDisplay() {
+export default function ProductsDisplay({ products }) {
   return (
     <>
       <h2>display</h2>
       <StyledDiv>
-        {arr.map((item) => (
-          <ProductItem key={item} />
+        {products?.map((item) => (
+          <ProductItem key={item.id} item={item} />
         ))}
       </StyledDiv>
     </>

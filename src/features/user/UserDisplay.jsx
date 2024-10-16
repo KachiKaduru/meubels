@@ -21,8 +21,13 @@ const StyledUserDisplay = styled.div`
   }
 
   .details {
+    h2 {
+      font-size: 2rem;
+    }
+
     p {
-      color: red;
+      color: var(--grey-color);
+      font-size: 1.4rem;
     }
   }
 `;
