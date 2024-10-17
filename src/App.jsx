@@ -6,11 +6,11 @@ import Notifications from "./pages/Notifications";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Favorite from "./pages/Favorite";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import Login, { action as loginAction } from "./pages/Login";
+import SignUp, { action as signupAction } from "./pages/SignUp";
 import ErrorPage from "./pages/ErrorPage";
-import Product from "./features/products/Product";
-import CheckOut from "./features/order/CheckOut";
+import Product, { loader as productLoader } from "./features/products/Product";
+import CheckOut, { action as checkoutAction } from "./features/order/CheckOut";
 import Success from "./pages/Success";
 import Orders from "./features/user/Orders";
 import CategoriesList from "./features/homepage/CategoriesList";
@@ -51,18 +51,22 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product />,
+        loader: productLoader,
       },
       {
         path: "/checkout",
         element: <CheckOut />,
+        action: checkoutAction,
       },
       {
         path: "/signup",
         element: <SignUp />,
+        action: signupAction,
       },
       {
         path: "/login",
         element: <Login />,
+        action: loginAction,
       },
       {
         path: "/success",

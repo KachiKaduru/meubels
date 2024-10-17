@@ -51,7 +51,9 @@ export default function Cart() {
             <h3>Total: </h3>
             <h3 className="price">$95.00 </h3>
           </aside>
-          <Button padding="large">Check out</Button>
+          <Button padding="large" type="link" route="/checkout">
+            Check out
+          </Button>
         </Bottom>
       </Layout>
     </section>

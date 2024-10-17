@@ -5,35 +5,54 @@ import Button from "../../ui/Button";
 import ShippingAddress from "./ShippingAddress";
 import Display from "../../ui/Display";
 import Layout from "../../ui/Layout";
+import { Form, redirect } from "react-router-dom";
 
-const StyledCheckOut = styled.section`
-  padding: 0 2rem 2rem;
-  height: 100dvh;
+const StyledCheckOut = styled(Layout)`
+  .form {
+    height: calc(100dvh - 8.5rem);
+    display: grid;
+    grid-template-rows: 1fr auto;
 
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+    button {
+      margin: 2rem 0;
+      font-size: 1.6rem;
+    }
 
-  .display {
-    overflow: auto;
+    .display {
+      padding: 1rem;
+    }
   }
 `;
+
 export default function CheckOut() {
   return (
-    <section>
-      <Layout>
-        <BarHeader>
-          <BackButton />
-          <h4>Check out</h4>
-        </BarHeader>
+    <StyledCheckOut>
+      <BarHeader>
+        <BackButton />
+        <h4>Check out</h4>
+      </BarHeader>
 
-        <Display>
+      <Form method="POST" className="form">
+        <Display className="display">
           <ShippingAddress />
+
+          {/* <input type="text" name="name" placeholder="your name" /> */}
+          <input type="number" name="cardNumber" placeholder="your card details" />
         </Display>
 
+        <input type="hidden" name="cart" value={"okay"} />
         <Button padding="large" uppercase={true}>
           Submit order
         </Button>
-      </Layout>
-    </section>
+      </Form>
+    </StyledCheckOut>
   );
+}
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
+
+  return redirect("/success");
 }

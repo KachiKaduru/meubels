@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
-const StyledShipping = styled.div`
+const StyledShipping = styled.label`
+  box-shadow: 0 0 1rem 0.1rem red;
+
   h4 {
     margin-bottom: 1rem;
   }
 
   div {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     padding: 1.5rem 2rem 1rem;
 
@@ -20,14 +22,14 @@ const StyledShipping = styled.div`
 export default function ShippingAddress() {
   return (
     <StyledShipping>
-      <h4>Shipping Address</h4>
+      <legend>Shipping Address</legend>
 
       <div>
-        <input type="text" placeholder="name" />
+        <input type="text" name="name" placeholder="name" />
       </div>
 
       <div>
-        <textarea placeholder="address here" rows={4}></textarea>
+        <textarea name="deliveryAddress" placeholder="address here" rows={4}></textarea>
       </div>
     </StyledShipping>
   );

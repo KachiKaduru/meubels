@@ -17,11 +17,11 @@ const StyledItem = styled.div`
 `;
 
 export default function ProductItem({ item }) {
-  const { image, name, price } = item;
+  const { image, name, price, id } = item;
   const navigate = useNavigate();
 
   function handleProductDisplay() {
-    navigate("product/1");
+    navigate(`/product/${id}`);
   }
 
   return (

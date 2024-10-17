@@ -24,9 +24,11 @@ export async function insertProducts(mainArray) {
   return data;
 }
 
-export async function getSingleProduct() {
-  const { data, error } = await supabase.from("shelves").select("id");
-
+export async function getSingleProduct(id) {
+  // const { data, error } = await supabase.from("shelves").select(id);
+  const { data, error } = await supabase.from("shelves").select("*").eq("id", id);
   handleError(error);
-  return data;
+
+  const item = data[0];
+  return item;
 }

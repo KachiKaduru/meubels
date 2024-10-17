@@ -5,6 +5,8 @@ import iconFavorites from "../../data/images/bookmark.svg";
 import Button from "../../ui/Button";
 import Display from "../../ui/Display";
 import CurrentQuantity from "../../ui/CurrentQuantity";
+import { getSingleProduct } from "../../services/apiProducts";
+import { useLoaderData } from "react-router-dom";
 
 const StyledProduct = styled.div`
   /* padding: 2rem; */
@@ -33,9 +35,18 @@ const StyledProduct = styled.div`
     gap: 1rem;
     padding: 1rem 0;
 
+    h3 {
+      font-family: "Gelasio", sans-serif;
+      font-size: 2.4rem;
+    }
+
     span {
       display: flex;
       justify-content: space-between;
+      h2 {
+        color: var(--black-color);
+        font-size: 3rem;
+      }
     }
   }
 
@@ -59,30 +70,33 @@ const StyledProduct = styled.div`
     }
   }
 `;
+export async function loader({ params }) {
+  const id = params.id;
+  const productItem = await getSingleProduct(id);
+  return productItem;
+}
 
 export default function Product() {
+  const productItem = useLoaderData();
+  console.log(productItem);
+  const { name, price, description, image } = productItem;
+
   return (
     <StyledProduct>
       <BackButton className="top" />
 
       <Display className="img-container">
-        <img src={product1} alt="" />
+        <img src={image} alt="" />
 
         <div className="details">
-          <h3>title</h3>
+          <h3>{name}</h3>
 
           <span>
-            <p>$price</p>
+            <h2>$ {price}</h2>
             <CurrentQuantity />
           </span>
 
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel a soluta corporis
-            blanditiis non natus omnis quae accusantium quia labore mollitia atque obcaecati harum,
-            saepe beatae tempore illum dicta, odit aliquid molestias perspiciatis! Natus, magni
-            nulla blanditiis veritatis ratione consectetur enim, minima maxime iusto illum repellat
-            provident ex dolores. Illo.
-          </p>
+          <p>{description}</p>
         </div>
       </Display>
 

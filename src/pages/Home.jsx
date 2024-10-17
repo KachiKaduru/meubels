@@ -26,24 +26,12 @@ const Div = styled.div`
 
 export async function loader() {
   const products = await getProducts();
+  // console.log(products);
   return products;
 }
 
 export default function Home() {
   const products = useLoaderData();
-
-  // const [products, setProducts] = useState([]);
-
-  // useEffect(function () {
-  //   getProducts().then((data) => {
-  //     console.log(data);
-  //     setProducts(data);
-  //   });
-  // }, []);
-
-  // function addObjects() {
-  //   insertProducts(shelvesArray);
-  // }
 
   return (
     <section>

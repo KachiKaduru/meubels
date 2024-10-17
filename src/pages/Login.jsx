@@ -8,6 +8,15 @@ const StyledLogin = styled.section`
   padding: 2rem;
   overflow: auto;
 `;
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
+
+  return null;
+}
+
 export default function Login() {
   return (
     <StyledLogin>
