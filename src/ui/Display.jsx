@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Display = styled.section`
+const StyledDisplay = styled.section`
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -8,4 +8,6 @@ const Display = styled.section`
   padding-bottom: 2rem;
 `;
 
-export default Display;
+export default function Display({ children, className }) {
+  return <StyledDisplay className={className}>{children}</StyledDisplay>;
+}

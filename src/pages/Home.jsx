@@ -8,7 +8,6 @@ import Navbar from "../ui/Navbar";
 import Display from "../ui/Display";
 import Layout from "../ui/Layout";
 import { getProducts, insertProducts } from "../services/apiProducts";
-import { shelvesArray } from "../data/productsArray";
 
 const Div = styled.div`
   font-family: "Gelasio", sans-serif;
@@ -32,6 +31,10 @@ export async function loader() {
 
 export default function Home() {
   const products = useLoaderData();
+
+  function addObjects() {
+    insertProducts();
+  }
 
   return (
     <section>

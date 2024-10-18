@@ -1,6 +1,6 @@
 import supabase from "../../supabase";
 
-function handleError(error) {
+export function handleError(error) {
   if (error) {
     // console.error(error);
     console.log(error);
@@ -9,14 +9,14 @@ function handleError(error) {
 }
 
 export async function getProducts() {
-  const { data, error } = await supabase.from("shelves").select("*");
+  const { data, error } = await supabase.from("products").select("*");
   handleError(error);
   return data;
 }
 
 export async function insertProducts(mainArray) {
   const { data, error } = await supabase
-    .from("shelves")
+    .from("products")
     .insert([...mainArray])
     .select();
 
@@ -26,7 +26,7 @@ export async function insertProducts(mainArray) {
 
 export async function getSingleProduct(id) {
   // const { data, error } = await supabase.from("shelves").select(id);
-  const { data, error } = await supabase.from("shelves").select("*").eq("id", id);
+  const { data, error } = await supabase.from("products").select("*").eq("id", id);
   handleError(error);
 
   const item = data[0];

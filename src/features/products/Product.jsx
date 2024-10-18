@@ -9,11 +9,21 @@ import { getSingleProduct } from "../../services/apiProducts";
 import { useLoaderData } from "react-router-dom";
 
 const StyledProduct = styled.div`
-  /* padding: 2rem; */
   display: grid;
   grid-template-rows: 1fr auto;
   height: 100dvh;
-  position: relative;
+
+  .imgContainer {
+    position: relative;
+    /* width: 100%; */
+    height: 45rem;
+    /* border: 1px solid red; */
+
+    .img {
+      height: 100%;
+      width: 100%;
+    }
+  }
 
   .top {
     position: absolute;
@@ -78,15 +88,16 @@ export async function loader({ params }) {
 
 export default function Product() {
   const productItem = useLoaderData();
-  console.log(productItem);
+  // console.log(productItem);
   const { name, price, description, image } = productItem;
 
   return (
     <StyledProduct>
-      <BackButton className="top" />
-
-      <Display className="img-container">
-        <img src={image} alt="" />
+      <Display>
+        <div className="imgContainer">
+          <BackButton className="top" />
+          <img src={image} alt="" className="img" />
+        </div>
 
         <div className="details">
           <h3>{name}</h3>
