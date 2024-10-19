@@ -1,6 +1,12 @@
 import supabase from "../../supabase";
 import { handleError } from "./apiProducts";
 
+export async function guestUser() {
+  const { data, error } = await supabase.auth.signInAnonymously();
+  handleError(error);
+  console.log(data);
+}
+
 export async function signUp(userEmail, userPassword) {
   const { data, error } = await supabase.auth.signUp({
     email: userEmail,
@@ -18,7 +24,9 @@ export async function login(userEmail, userPassword) {
   });
 
   handleError(error);
-  return data;
+  console.log("success", data);
+  localStorage.setItem("user_id", data.user.id);
+  return null;
 }
 
 export async function logout() {

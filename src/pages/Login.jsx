@@ -14,13 +14,14 @@ const StyledLogin = styled.section`
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
+  console.log(data);
 
   const { email, password } = data;
   login(email, password);
 
-  const errors = {};
+  // const errors = {};
 
-  if (Object.keys(errors).length > 0) return errors;
+  // if (Object.keys(errors).length > 0) return errors;
 
   // console.log(data, error);
   return null;

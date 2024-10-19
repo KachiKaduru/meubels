@@ -7,11 +7,17 @@ import Display from "../../ui/Display";
 import CurrentQuantity from "../../ui/CurrentQuantity";
 import { getSingleProduct } from "../../services/apiProducts";
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import { HiOutlineBookmark } from "react-icons/hi2";
 
 const StyledProduct = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
   height: 100dvh;
+
+  .added {
+    background-color: red;
+  }
 
   .imgContainer {
     position: relative;
@@ -73,9 +79,10 @@ const StyledProduct = styled.div`
       border-radius: 1rem;
       /* background: var(--grey-color); */
 
-      img {
+      svg {
         width: 2.4rem;
         height: 2.4rem;
+        /* color: #ddd; */
       }
     }
   }
@@ -90,6 +97,11 @@ export default function Product() {
   const productItem = useLoaderData();
   // console.log(productItem);
   const { name, price, description, image } = productItem;
+  const [added, setAdded] = useState(false);
+
+  function toggleFavorite() {
+    setAdded((a) => !a);
+  }
 
   return (
     <StyledProduct>
@@ -112,8 +124,9 @@ export default function Product() {
       </Display>
 
       <div className="bottom">
-        <div>
-          <img src={iconFavorites} alt="" />
+        <div className={`${added && "added"}`} onClick={toggleFavorite}>
+          {/* <img src={iconFavorites} alt="" /> */}
+          <HiOutlineBookmark />
         </div>
         <Button padding="large">Add to cart</Button>
       </div>
