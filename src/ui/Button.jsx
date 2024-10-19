@@ -75,6 +75,7 @@ export default function Button({
   invert,
   type = "normal",
   route,
+  onClick,
 }) {
   //
   if (type === "link")
@@ -92,7 +93,14 @@ export default function Button({
     );
 
   return (
-    <StyledButton cover={cover} padding={padding} uppercase={uppercase} invert={invert} type={type}>
+    <StyledButton
+      cover={cover}
+      padding={padding}
+      uppercase={uppercase}
+      invert={invert}
+      type={type}
+      onClick={onClick}
+    >
       {children}
     </StyledButton>
   );

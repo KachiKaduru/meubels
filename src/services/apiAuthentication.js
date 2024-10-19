@@ -14,6 +14,9 @@ export async function signUp(userEmail, userPassword) {
   });
 
   handleError(error);
+  localStorage.setItem("user_id", data.user.id);
+  console.log("success", data);
+
   return data;
 }
 

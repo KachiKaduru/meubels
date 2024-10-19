@@ -19,11 +19,6 @@ export async function action({ request }) {
   const { email, password } = data;
   login(email, password);
 
-  // const errors = {};
-
-  // if (Object.keys(errors).length > 0) return errors;
-
-  // console.log(data, error);
   return null;
   // return redirect("/");
 }

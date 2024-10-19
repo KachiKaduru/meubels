@@ -6,9 +6,10 @@ import Button from "../../ui/Button";
 import Display from "../../ui/Display";
 import CurrentQuantity from "../../ui/CurrentQuantity";
 import { getSingleProduct } from "../../services/apiProducts";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { useState } from "react";
 import { HiOutlineBookmark } from "react-icons/hi2";
+import { addItemToLocalCart } from "../../services/apiCart";
 
 const StyledProduct = styled.div`
   display: grid;
@@ -95,12 +96,18 @@ export async function loader({ params }) {
 
 export default function Product() {
   const productItem = useLoaderData();
+  const { id } = useParams();
   // console.log(productItem);
   const { name, price, description, image } = productItem;
   const [added, setAdded] = useState(false);
 
   function toggleFavorite() {
     setAdded((a) => !a);
+  }
+
+  function addToCart() {
+    // console.log("added");
+    addItemToLocalCart(id);
   }
 
   return (
@@ -128,7 +135,9 @@ export default function Product() {
           {/* <img src={iconFavorites} alt="" /> */}
           <HiOutlineBookmark />
         </div>
-        <Button padding="large">Add to cart</Button>
+        <Button onClick={addToCart} padding="large">
+          Add to cart
+        </Button>
       </div>
     </StyledProduct>
   );

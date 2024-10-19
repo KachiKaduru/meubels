@@ -10,6 +10,7 @@ import Layout from "../ui/Layout";
 import { getProducts, insertProducts } from "../services/apiProducts";
 import { v4 as uuidv4 } from "uuid";
 import { logout } from "../services/apiAuthentication";
+import { useSelector } from "react-redux";
 
 const Div = styled.div`
   font-family: "Gelasio", sans-serif;
@@ -27,14 +28,18 @@ const Div = styled.div`
 
 export async function loader() {
   const products = await getProducts();
-  // console.log(products);
   return products;
 }
 
 export default function Home() {
   const products = useLoaderData();
   const guestId = uuidv4();
-  console.log(guestId);
+  // console.log(guestId);
+
+  // const user = useSelector((state) => state.user);
+  // const cart = useSelector((state) => state.cart);
+  // const { name } = user;
+  // const { totalPrice } = cart;
 
   function addObjects() {
     // insertProducts();
@@ -54,6 +59,7 @@ export default function Home() {
         </BarHeader>
         {/* <button onClick={addObjects}>click me daddy!!!!!!!!!!!</button> */}
         <Display>
+          {/* <p>{`${name} ${totalPrice}`}</p> */}
           <Outlet />
           <ProductsDisplay products={products} />
         </Display>
