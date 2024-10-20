@@ -46,6 +46,13 @@ const invert = css`
 const uppercase = css`
   text-transform: uppercase;
 `;
+
+const disabled = css`
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+  border: none;
+  /* color: white; */
+`;
 const StyledLink = styled(Link)`
   display: block;
   text-decoration: none;
@@ -65,6 +72,7 @@ const StyledButton = styled.button`
   ${(props) => paddings[props.padding]} 
   ${(props) => props.uppercase && uppercase}
   ${(props) => props.invert && invert}
+  ${(props) => props.disabled && disabled}
 `;
 
 export default function Button({
@@ -76,6 +84,7 @@ export default function Button({
   type = "normal",
   route,
   onClick,
+  disabled,
 }) {
   //
   if (type === "link")
@@ -94,6 +103,7 @@ export default function Button({
 
   return (
     <StyledButton
+      disabled={disabled}
       cover={cover}
       padding={padding}
       uppercase={uppercase}

@@ -36,7 +36,8 @@ export default function Home() {
   const guestId = uuidv4();
   // console.log(guestId);
 
-  // const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+  // console.log(user);
   // const cart = useSelector((state) => state.cart);
   // const { name } = user;
   // const { totalPrice } = cart;

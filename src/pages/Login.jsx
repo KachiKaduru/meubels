@@ -19,8 +19,8 @@ export async function action({ request }) {
   const { email, password } = data;
   login(email, password);
 
-  return null;
-  // return redirect("/");
+  return redirect("/");
+  // return null;
 }
 
 export default function Login() {

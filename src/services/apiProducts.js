@@ -1,12 +1,5 @@
 import supabase from "../../supabase";
-
-export function handleError(error) {
-  if (error) {
-    // console.error(error);
-    console.log(error);
-    throw new Error(error.message);
-  }
-}
+import { handleError } from "../utils/helpers";
 
 export async function getProducts() {
   const { data, error } = await supabase.from("products").select("*");

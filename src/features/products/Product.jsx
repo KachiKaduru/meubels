@@ -1,15 +1,14 @@
+import { useSelector } from "react-redux";
+import { useLoaderData, useParams } from "react-router-dom";
 import styled from "styled-components";
-import product1 from "../../data/images/product-1.png";
+
+import { getSingleProduct } from "../../services/apiProducts";
+import { addItemToCart, addItemToLocalCart, getAllCartItems } from "../../services/apiCart";
 import BackButton from "../../ui/BackButton";
-import iconFavorites from "../../data/images/bookmark.svg";
 import Button from "../../ui/Button";
 import Display from "../../ui/Display";
 import CurrentQuantity from "../../ui/CurrentQuantity";
-import { getSingleProduct } from "../../services/apiProducts";
-import { useLoaderData, useParams } from "react-router-dom";
-import { useState } from "react";
 import { HiOutlineBookmark } from "react-icons/hi2";
-import { addItemToLocalCart } from "../../services/apiCart";
 
 const StyledProduct = styled.div`
   display: grid;
@@ -91,23 +90,29 @@ const StyledProduct = styled.div`
 export async function loader({ params }) {
   const id = params.id;
   const productItem = await getSingleProduct(id);
-  return productItem;
+  const cart = await getAllCartItems();
+
+  return { productItem, cart };
 }
 
 export default function Product() {
-  const productItem = useLoaderData();
   const { id } = useParams();
-  // console.log(productItem);
+  const { userId } = useSelector((state) => state.user);
+  const { productItem, cart } = useLoaderData();
   const { name, price, description, image } = productItem;
-  const [added, setAdded] = useState(false);
 
-  function toggleFavorite() {
-    setAdded((a) => !a);
+  const inCart = checkCart(id, userId);
+
+  function checkCart(productId, userId) {
+    const inCart = cart.filter((item) => item.product_id === productId && item.user_id === userId);
+    if (inCart.length < 1) return false;
+    return true;
   }
 
   function addToCart() {
-    // console.log("added");
-    addItemToLocalCart(id);
+    if (userId === null) addItemToLocalCart(id);
+    addItemToCart(id, userId);
+    console.log("added");
   }
 
   return (
@@ -131,12 +136,11 @@ export default function Product() {
       </Display>
 
       <div className="bottom">
-        <div className={`${added && "added"}`} onClick={toggleFavorite}>
-          {/* <img src={iconFavorites} alt="" /> */}
+        <div className={`${inCart && "added"}`}>
           <HiOutlineBookmark />
         </div>
-        <Button onClick={addToCart} padding="large">
-          Add to cart
+        <Button onClick={addToCart} padding="large" disabled={inCart}>
+          {inCart ? "Already in cart" : "Add to cart"}
         </Button>
       </div>
     </StyledProduct>

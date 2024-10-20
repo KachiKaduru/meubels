@@ -1,7 +1,6 @@
-import { handleError } from "./apiProducts";
+import { handleError } from "../utils/helpers";
 
 // Insert a row
-
 export async function addToFavorites(productId, userId) {
   const { data, error } = await supabase
     .from("favorites")

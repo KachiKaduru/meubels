@@ -5,6 +5,10 @@ import Item from "../ui/Item";
 import Button from "../ui/Button";
 import Layout from "../ui/Layout";
 import Display from "../ui/Display";
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import store from "../store";
+import { getUserId } from "../utils/helpers";
+import { getCartItems } from "../services/apiCart";
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -31,7 +35,29 @@ const Bottom = styled.footer`
   }
 `;
 
+export async function loader() {
+  const userId = getUserId();
+  if (userId === null) return;
+
+  const cart = await getCartItems(userId);
+  return { cart };
+}
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
+
+  const userId = getUserId();
+  if (userId === null) return redirect("/signup");
+
+  return redirect("/checkout");
+}
+
 export default function Cart() {
+  const { cart } = useLoaderData();
+  // console.log(cart);
+
   return (
     <section>
       <Layout>
@@ -41,8 +67,8 @@ export default function Cart() {
         </BarHeader>
 
         <Display>
-          {arr.map((item) => (
-            <Item key={item} type={"cart"} />
+          {cart.map((item) => (
+            <Item key={item.product_id} type={"cart"} id={item.product_id} />
           ))}
         </Display>
 
@@ -51,9 +77,11 @@ export default function Cart() {
             <h3>Total: </h3>
             <h3 className="price">$95.00 </h3>
           </aside>
-          <Button padding="large" type="link" route="/checkout">
-            Check out
-          </Button>
+
+          <Form method="">
+            <input type="hidden" name="cart" value={arr} />
+            <Button padding="large">Check out</Button>
+          </Form>
         </Bottom>
       </Layout>
     </section>

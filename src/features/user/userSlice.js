@@ -1,7 +1,7 @@
 import { createReducer, createSlice } from "@reduxjs/toolkit";
 
 const userInitialSlice = {
-  userId: "",
+  userId: localStorage.getItem("user_id"),
   name: "john",
 };
 

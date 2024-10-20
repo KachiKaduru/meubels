@@ -3,7 +3,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
 import Home, { loader as homeLoader } from "./pages/Home";
 import Notifications from "./pages/Notifications";
-import Cart from "./pages/Cart";
+import Cart, { action as cartAction, loader as cartLoader } from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Favorite from "./pages/Favorite";
 import Login, { action as loginAction } from "./pages/Login";
@@ -47,6 +47,8 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+        action: cartAction,
+        loader: cartLoader,
       },
       {
         path: "/product/:id",

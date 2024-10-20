@@ -1,5 +1,5 @@
 import supabase from "../../supabase";
-import { handleError } from "./apiProducts";
+import { handleError } from "../utils/helpers";
 
 export async function guestUser() {
   const { data, error } = await supabase.auth.signInAnonymously();

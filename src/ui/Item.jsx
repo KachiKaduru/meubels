@@ -3,6 +3,8 @@ import img2 from "../data/images/product-2.png";
 import deleteBtn from "../data/images/delete-btn.svg";
 import addToCartBtn from "../data/images/shopping-bag-icon.svg";
 import CurrentQuantity from "./CurrentQuantity";
+import { useEffect, useState } from "react";
+import { getSingleProduct } from "../services/apiProducts";
 
 const StyledItem = styled.div`
   display: grid;
@@ -75,17 +77,35 @@ const StyledItem = styled.div`
   }
 `;
 
-export default function Item({ type = "cart" }) {
+export default function Item({ id, type = "cart" }) {
+  const [product, setProduct] = useState([]);
+  const { image, name, price } = product;
+  // console.log(product);
+
+  useEffect(
+    function () {
+      async function getCartItem() {
+        const item = await getSingleProduct(id);
+        if (item) setProduct(item);
+      }
+      getCartItem();
+    },
+    [id]
+  );
+
   return (
     <StyledItem>
       <div className="imgContainer">
-        <img src={img2} alt="" />
+        {/* <img src={img2} alt="" /> */}
+        <img src={image} alt="" />
       </div>
 
       <div className="other">
         <span>
-          <p>Coffee Table</p>
-          <h4>$50.00</h4>
+          <p>{name}</p>
+          <h4>$ {price}</h4>
+          {/* <p>Coffee Table</p> */}
+          {/* <h4>$50.00</h4> */}
         </span>
 
         {type === "cart" && <CurrentQuantity />}
