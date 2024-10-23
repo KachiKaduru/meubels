@@ -25,12 +25,6 @@ const router = createBrowserRouter([
         element: <Home />,
         loader: homeLoader,
         errorElement: <ErrorPage />,
-        children: [
-          {
-            path: "/category",
-            element: <CategoriesList />,
-          },
-        ],
       },
       {
         path: "/favorites",

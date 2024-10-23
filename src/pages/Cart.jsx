@@ -8,7 +8,8 @@ import Display from "../ui/Display";
 import { Form, redirect, useLoaderData } from "react-router-dom";
 import store from "../store";
 import { getUserId } from "../utils/helpers";
-import { getCartItems } from "../services/apiCart";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../features/cart/cartSlice";
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -36,11 +37,13 @@ const Bottom = styled.footer`
 `;
 
 export async function loader() {
-  const userId = getUserId();
-  if (userId === null) return;
+  // const userId = getUserId();
+  // if (userId === null) return;
+  // const cart = await getCartItems(userId);
+  // return { cart };
 
-  const cart = await getCartItems(userId);
-  return { cart };
+  const cart = store.getState("cart").cart;
+  return cart;
 }
 
 export async function action({ request }) {
@@ -55,8 +58,9 @@ export async function action({ request }) {
 }
 
 export default function Cart() {
-  const { cart } = useLoaderData();
-  // console.log(cart);
+  // const { cart } = useLoaderData();
+  const cart = useSelector((state) => state.cart.cart);
+  const totalCartPrice = cart.reduce((total, item) => total + item.totalPrice, 0);
 
   return (
     <section>
@@ -67,19 +71,26 @@ export default function Cart() {
         </BarHeader>
 
         <Display>
+          {cart.length < 1 && <p>No items in your cart yet!</p>}
+
           {cart.map((item) => (
-            <Item key={item.product_id} type={"cart"} id={item.product_id} />
+            <Item
+              key={item.product_id}
+              productId={item.product_id}
+              productQuantity={item.quantity}
+              productPrice={item.totalPrice}
+            />
           ))}
         </Display>
 
         <Bottom>
           <aside className="total">
             <h3>Total: </h3>
-            <h3 className="price">$95.00 </h3>
+            <h3 className="price">$ {totalCartPrice}.00 </h3>
           </aside>
 
           <Form method="">
-            <input type="hidden" name="cart" value={arr} />
+            <input type="hidden" name="cart" value={cart} />
             <Button padding="large">Check out</Button>
           </Form>
         </Bottom>

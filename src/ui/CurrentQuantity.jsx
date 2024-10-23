@@ -22,24 +22,34 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default function CurrentQuantity() {
-  const [quantity, setQuantity] = useState(1);
+export default function CurrentQuantity({ setOuterQuantity, cartQuantity }) {
+  const [quantity, setQuantity] = useState(cartQuantity || 1);
 
-  function handleIncrease() {
+  function handleIncrease(q) {
     if (quantity > 9) return;
-    setQuantity((q) => q + 1);
+    setQuantity(q + 1);
+    if (cartQuantity) {
+      setOuterQuantity(cartQuantity + 1);
+    } else {
+      setOuterQuantity(q + 1);
+    }
   }
 
-  function handleDecrease() {
+  function handleDecrease(q) {
     if (quantity === 1) return;
-    setQuantity((q) => q - 1);
+    setQuantity(q - 1);
+    if (cartQuantity) {
+      setOuterQuantity(cartQuantity - 1);
+    } else {
+      setOuterQuantity(q - 1);
+    }
   }
 
   return (
     <StyledDiv>
-      <button onClick={handleDecrease}>-</button>
+      <button onClick={() => handleDecrease(quantity)}>-</button>
       <span>0{quantity}</span>
-      <button onClick={handleIncrease}>+</button>
+      <button onClick={() => handleIncrease(quantity)}>+</button>
     </StyledDiv>
   );
 }

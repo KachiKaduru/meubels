@@ -1,14 +1,16 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useLoaderData, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { getSingleProduct } from "../../services/apiProducts";
-import { addItemToCart, addItemToLocalCart, getAllCartItems } from "../../services/apiCart";
+import { addItemToCart } from "../../services/apiCart";
+
+import { HiOutlineBookmark } from "react-icons/hi2";
 import BackButton from "../../ui/BackButton";
 import Button from "../../ui/Button";
 import Display from "../../ui/Display";
 import CurrentQuantity from "../../ui/CurrentQuantity";
-import { HiOutlineBookmark } from "react-icons/hi2";
 
 const StyledProduct = styled.div`
   display: grid;
@@ -87,32 +89,26 @@ const StyledProduct = styled.div`
     }
   }
 `;
+
 export async function loader({ params }) {
   const id = params.id;
   const productItem = await getSingleProduct(id);
-  const cart = await getAllCartItems();
 
-  return { productItem, cart };
+  return { productItem };
 }
 
 export default function Product() {
   const { id } = useParams();
-  const { userId } = useSelector((state) => state.user);
-  const { productItem, cart } = useLoaderData();
+  const { productItem } = useLoaderData();
   const { name, price, description, image } = productItem;
+  const cart = useSelector((state) => state.cart.cart);
+  const isInCart = cart.some((item) => item.product_id === id);
 
-  const inCart = checkCart(id, userId);
-
-  function checkCart(productId, userId) {
-    const inCart = cart.filter((item) => item.product_id === productId && item.user_id === userId);
-    if (inCart.length < 1) return false;
-    return true;
-  }
+  const [quantity, setQuantity] = useState(1);
 
   function addToCart() {
-    if (userId === null) addItemToLocalCart(id);
-    addItemToCart(id, userId);
-    console.log("added");
+    addItemToCart(id, quantity);
+    console.log(id, quantity);
   }
 
   return (
@@ -128,7 +124,7 @@ export default function Product() {
 
           <span>
             <h2>$ {price}</h2>
-            <CurrentQuantity />
+            {isInCart || <CurrentQuantity setOuterQuantity={setQuantity} />}
           </span>
 
           <p>{description}</p>
@@ -136,11 +132,12 @@ export default function Product() {
       </Display>
 
       <div className="bottom">
-        <div className={`${inCart && "added"}`}>
+        <div>
           <HiOutlineBookmark />
         </div>
-        <Button onClick={addToCart} padding="large" disabled={inCart}>
-          {inCart ? "Already in cart" : "Add to cart"}
+
+        <Button onClick={addToCart} padding="large" disabled={isInCart}>
+          {`${isInCart ? "Added to cart" : "Add to cart"}`}
         </Button>
       </div>
     </StyledProduct>

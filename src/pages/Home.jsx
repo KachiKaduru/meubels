@@ -3,14 +3,12 @@ import styled from "styled-components";
 import ProductsDisplay from "../features/homepage/ProductsDisplay";
 import BarHeader from "../ui/BarHeader";
 import SearchComponent from "../ui/SearchComponent";
-import CartComponent from "../features/cart/CartComponent";
 import Navbar from "../ui/Navbar";
 import Display from "../ui/Display";
 import Layout from "../ui/Layout";
-import { getProducts, insertProducts } from "../services/apiProducts";
-import { v4 as uuidv4 } from "uuid";
-import { logout } from "../services/apiAuthentication";
+import { getProducts } from "../services/apiProducts";
 import { useSelector } from "react-redux";
+import FavoritesComponent from "../features/cart/FavoritesComponent";
 
 const Div = styled.div`
   font-family: "Gelasio", sans-serif;
@@ -33,19 +31,7 @@ export async function loader() {
 
 export default function Home() {
   const products = useLoaderData();
-  const guestId = uuidv4();
-  // console.log(guestId);
-
   const user = useSelector((state) => state.user);
-  // console.log(user);
-  // const cart = useSelector((state) => state.cart);
-  // const { name } = user;
-  // const { totalPrice } = cart;
-
-  function addObjects() {
-    // insertProducts();
-    // logout();
-  }
 
   return (
     <section>
@@ -56,12 +42,9 @@ export default function Home() {
             <p>make home</p>
             <h3>beautiful</h3>
           </Div>
-          <CartComponent />
+          <FavoritesComponent />
         </BarHeader>
-        {/* <button onClick={addObjects}>click me daddy!!!!!!!!!!!</button> */}
         <Display>
-          {/* <p>{`${name} ${totalPrice}`}</p> */}
-          <Outlet />
           <ProductsDisplay products={products} />
         </Display>
 

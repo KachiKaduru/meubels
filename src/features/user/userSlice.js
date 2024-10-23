@@ -1,7 +1,7 @@
-import { createReducer, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const userInitialSlice = {
-  userId: localStorage.getItem("user_id"),
+  userId: localStorage.getItem("user_id") || "",
   name: "john",
 };
 
@@ -9,7 +9,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: userInitialSlice,
   reducers: {
-    setUserId(state, action) {
+    updateUserId(state, action) {
       state.userId = action.payload;
     },
     updateName(state, action) {
@@ -18,6 +18,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserId } = userSlice.actions;
+export const { updateUserId, updateName } = userSlice.actions;
 
 export default userSlice.reducer;

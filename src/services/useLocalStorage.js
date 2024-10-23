@@ -53,3 +53,13 @@ const transferCartToUser = async (user_id) => {
   }
   localStorage.removeItem("cart"); // Clear local storage after transfer
 };
+
+export const localStorageMiddleware = (storeAPI) => (next) => (action) => {
+  const result = next(action); // Pass the action through the reducer
+  if (action.type.includes("cart")) {
+    // Check if the action is related to the cart
+    const cart = storeAPI.getState().cart.cart;
+    localStorage.setItem("cart", JSON.stringify(cart)); // Update localStorage with new cart state
+  }
+  return result;
+};

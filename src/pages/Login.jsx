@@ -20,20 +20,16 @@ export async function action({ request }) {
   login(email, password);
 
   return redirect("/");
-  // return null;
 }
 
 export default function Login() {
   const formError = useActionData();
-  // console.log(formError);
 
   return (
     <StyledLogin>
       <LogoComponent />
 
       <AccountHeading>welcome back!</AccountHeading>
-
-      <p>{}</p>
 
       <AccountForm type="login" />
     </StyledLogin>

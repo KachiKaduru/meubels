@@ -1,5 +1,8 @@
 import supabase from "../../supabase";
+import { updateCart } from "../features/cart/cartSlice";
+import store from "../store";
 import { handleError } from "../utils/helpers";
+import { getSingleProduct } from "./apiProducts";
 
 // Read all rows
 export async function getAllCartItems() {
@@ -20,23 +23,35 @@ export async function getCartItems(user_id) {
   return data;
 }
 
-export async function addItemToCart(productId, userId) {
-  const { data, error } = await supabase
-    .from("cart")
-    .insert([{ product_id: productId, user_id: userId }])
-    .select();
+// export async function addItemToCart(productId, userId) {
+//   const { data, error } = await supabase
+//     .from("cart")
+//     .insert([{ product_id: productId, user_id: userId }])
+//     .select();
 
-  handleError(error);
-  console.log(data);
-}
+//   handleError(error);
+//   console.log(data);
+// }
 
-export function addItemToLocalCart(id) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const alreadyAdded = cart.map((item) => item.product_id === id);
+export async function addItemToCart(id, q) {
+  const { cart } = store.getState().cart;
+  const alreadyAdded = cart.filter((item) => item.product_id === id).length > 0;
   if (alreadyAdded) return;
 
-  const newCart = [...cart, { product_id: id }];
-  console.log(newCart);
-  localStorage.setItem("cart", JSON.stringify(newCart));
+  const { price } = await getSingleProduct(id);
+
+  const cartItem = {
+    product_id: id,
+    quantity: q,
+    unitPrice: price,
+    totalPrice: price * q,
+  };
+
+  store.dispatch(updateCart(cartItem));
+  localStorage.setItem("cart", JSON.stringify([...cart, cartItem]));
 }
+
+// function increaseCartQuantity(id, q) {
+//   const { cart } = store.getState().cart;
+//   const item = cart.filter((item) => item.product_id === id);
+// }

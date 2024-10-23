@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { navlinksArray } from "../data/NavLinksArray";
 
-import { HiOutlineBookmark } from "react-icons/hi2";
+import { HiOutlineBookmark, HiOutlineShoppingCart } from "react-icons/hi2";
 import { HiOutlineHome } from "react-icons/hi2";
 import { HiOutlineUser } from "react-icons/hi2";
 import { HiOutlineBell } from "react-icons/hi2";
+import { useSelector } from "react-redux";
 
 const StyledUl = styled.ul`
   /* border: 1px solid green; */
@@ -23,6 +24,8 @@ const StyledUl = styled.ul`
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
+  position: relative;
+  border: 1px solid green;
 
   svg {
     width: 2.4rem;
@@ -36,20 +39,37 @@ const StyledNavLink = styled(NavLink)`
   &.active:visited svg {
     color: white;
     background-color: var(--black-color);
-    /* mix-blend-mode: screen; */
-    /* filter: invert(0); */
+  }
+
+  span {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    font-weight: 700;
+    background: red;
+    color: white;
+    font-size: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
   }
 `;
 
 export default function Navbar() {
+  const cart = useSelector((state) => state.cart.cart);
+  console.log(cart.length);
+
   return (
     <nav>
       <StyledUl>
         <StyledNavLink to="/">
           <HiOutlineHome />
         </StyledNavLink>
-        <StyledNavLink to="/favorites">
-          <HiOutlineBookmark />
+        <StyledNavLink to="/cart">
+          {cart.length > 0 ? <span>{cart.length}</span> : null}
+          <HiOutlineShoppingCart />
         </StyledNavLink>
         <StyledNavLink to="/notifications">
           <HiOutlineBell />

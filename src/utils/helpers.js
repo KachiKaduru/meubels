@@ -9,8 +9,7 @@ export function handleError(error) {
 }
 
 export function getUserId() {
-  const state = store.getState();
-  const userId = state.user.userId;
+  const { userId } = store.getState().user;
   //   if (userId === null) return;
   return userId;
 }

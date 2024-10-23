@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import img2 from "../data/images/product-2.png";
 import deleteBtn from "../data/images/delete-btn.svg";
 import addToCartBtn from "../data/images/shopping-bag-icon.svg";
 import CurrentQuantity from "./CurrentQuantity";
 import { useEffect, useState } from "react";
 import { getSingleProduct } from "../services/apiProducts";
+import { useDispatch } from "react-redux";
+import { updateItemQuantity } from "../features/cart/cartSlice";
 
 const StyledItem = styled.div`
   display: grid;
@@ -77,38 +78,45 @@ const StyledItem = styled.div`
   }
 `;
 
-export default function Item({ id, type = "cart" }) {
-  const [product, setProduct] = useState([]);
-  const { image, name, price } = product;
+export default function Item({ productId, type = "cart", productQuantity, productPrice }) {
+  const dispatch = useDispatch();
+
+  const [product, setProduct] = useState({});
+  const { image, name } = product;
   // console.log(product);
+
+  // const currentPrice = productPrice * productQuantity;
+
+  function setItemQuantity(newQuantity) {
+    dispatch(updateItemQuantity({ id: productId, newQuantity }));
+  }
 
   useEffect(
     function () {
       async function getCartItem() {
-        const item = await getSingleProduct(id);
+        const item = await getSingleProduct(productId);
         if (item) setProduct(item);
       }
       getCartItem();
     },
-    [id]
+    [productId]
   );
 
   return (
     <StyledItem>
       <div className="imgContainer">
-        {/* <img src={img2} alt="" /> */}
         <img src={image} alt="" />
       </div>
 
       <div className="other">
         <span>
           <p>{name}</p>
-          <h4>$ {price}</h4>
-          {/* <p>Coffee Table</p> */}
-          {/* <h4>$50.00</h4> */}
+          <h4>$ {productPrice}</h4>
         </span>
 
-        {type === "cart" && <CurrentQuantity />}
+        {type === "cart" && (
+          <CurrentQuantity cartQuantity={productQuantity} setOuterQuantity={setItemQuantity} />
+        )}
       </div>
 
       <aside>
