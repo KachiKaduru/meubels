@@ -1,25 +1,18 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { navlinksArray } from "../data/NavLinksArray";
 
-import { HiOutlineBookmark, HiOutlineShoppingCart } from "react-icons/hi2";
+import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { HiOutlineHome } from "react-icons/hi2";
 import { HiOutlineUser } from "react-icons/hi2";
 import { HiOutlineBell } from "react-icons/hi2";
-import { useSelector } from "react-redux";
 
 const StyledUl = styled.ul`
-  /* border: 1px solid green; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem 2rem 3rem;
   box-shadow: 0 -0.3rem 1rem 1px #ddd;
-
-  /* @media (min-width: 767px) { */
-  /* flex-direction: column; */
-  /* grid-column: 1/2; */
-  /* } */
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -58,7 +51,6 @@ const StyledNavLink = styled(NavLink)`
 
 export default function Navbar() {
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart.length);
 
   return (
     <nav>
@@ -80,17 +72,3 @@ export default function Navbar() {
     </nav>
   );
 }
-// export default function Navbar() {
-//   return (
-//     <nav>
-//       <StyledUl>
-//         {navlinksArray.map((link) => (
-//           <StyledNavLink to={link.route} key={link.id}>
-//             <img src={link.img} alt="" />
-//             {/* <{link.svg}></> */}
-//           </StyledNavLink>
-//         ))}
-//       </StyledUl>
-//     </nav>
-//   );
-// }

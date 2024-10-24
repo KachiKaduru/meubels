@@ -1,17 +1,14 @@
+import { Form, redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+
+import { getUserId } from "../utils/helpers";
 import BackButton from "../ui/BackButton";
 import BarHeader from "../ui/BarHeader";
 import Item from "../ui/Item";
 import Button from "../ui/Button";
 import Layout from "../ui/Layout";
 import Display from "../ui/Display";
-import { Form, redirect, useLoaderData } from "react-router-dom";
-import store from "../store";
-import { getUserId } from "../utils/helpers";
-import { useDispatch, useSelector } from "react-redux";
-import { updateCart } from "../features/cart/cartSlice";
-
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const Bottom = styled.footer`
   padding: 1rem 0.5rem;
@@ -41,9 +38,7 @@ export async function loader() {
   // if (userId === null) return;
   // const cart = await getCartItems(userId);
   // return { cart };
-
-  const cart = store.getState("cart").cart;
-  return cart;
+  return null;
 }
 
 export async function action({ request }) {
@@ -52,13 +47,12 @@ export async function action({ request }) {
   console.log(data);
 
   const userId = getUserId();
-  if (userId === null) return redirect("/signup");
+  if (!userId) return redirect("/signup");
 
   return redirect("/checkout");
 }
 
 export default function Cart() {
-  // const { cart } = useLoaderData();
   const cart = useSelector((state) => state.cart.cart);
   const totalCartPrice = cart.reduce((total, item) => total + item.totalPrice, 0);
 
@@ -82,18 +76,19 @@ export default function Cart() {
             />
           ))}
         </Display>
+        {cart.length > 0 && (
+          <Bottom>
+            <aside className="total">
+              <h3>Total: </h3>
+              <h3 className="price">$ {totalCartPrice}.00 </h3>
+            </aside>
 
-        <Bottom>
-          <aside className="total">
-            <h3>Total: </h3>
-            <h3 className="price">$ {totalCartPrice}.00 </h3>
-          </aside>
-
-          <Form method="">
-            <input type="hidden" name="cart" value={cart} />
-            <Button padding="large">Check out</Button>
-          </Form>
-        </Bottom>
+            <Form method="">
+              <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+              <Button padding="large">Check out</Button>
+            </Form>
+          </Bottom>
+        )}
       </Layout>
     </section>
   );

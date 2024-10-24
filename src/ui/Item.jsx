@@ -1,11 +1,14 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import deleteBtn from "../data/images/delete-btn.svg";
+import { HiOutlineTrash } from "react-icons/hi";
+
+import { getSingleProduct } from "../services/apiProducts";
+import { deleteItemFromCart } from "../services/apiCart";
+import { updateItemQuantity } from "../features/cart/cartSlice";
+
 import addToCartBtn from "../data/images/shopping-bag-icon.svg";
 import CurrentQuantity from "./CurrentQuantity";
-import { useEffect, useState } from "react";
-import { getSingleProduct } from "../services/apiProducts";
-import { useDispatch } from "react-redux";
-import { updateItemQuantity } from "../features/cart/cartSlice";
 
 const StyledItem = styled.div`
   display: grid;
@@ -58,10 +61,17 @@ const StyledItem = styled.div`
   .delete {
     width: 2.4rem;
     height: 2.4rem;
+    cursor: pointer;
 
-    img {
-      width: 85%;
-      height: 85%;
+    &:hover {
+      svg {
+        color: red;
+      }
+    }
+
+    svg {
+      width: 90%;
+      height: 90%;
     }
   }
 
@@ -78,14 +88,11 @@ const StyledItem = styled.div`
   }
 `;
 
-export default function Item({ productId, type = "cart", productQuantity, productPrice }) {
+export default function Item({ type = "cart", productId, productQuantity, productPrice }) {
   const dispatch = useDispatch();
 
   const [product, setProduct] = useState({});
   const { image, name } = product;
-  // console.log(product);
-
-  // const currentPrice = productPrice * productQuantity;
 
   function setItemQuantity(newQuantity) {
     dispatch(updateItemQuantity({ id: productId, newQuantity }));
@@ -120,8 +127,8 @@ export default function Item({ productId, type = "cart", productQuantity, produc
       </div>
 
       <aside>
-        <span className="delete">
-          <img src={deleteBtn} alt="delete" />
+        <span className="delete" onClick={() => deleteItemFromCart(productId)}>
+          <HiOutlineTrash />
         </span>
 
         {type === "favorites" && (

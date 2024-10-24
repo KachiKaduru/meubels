@@ -1,8 +1,7 @@
 import supabase from "../../supabase";
-import { updateCart } from "../features/cart/cartSlice";
 import store from "../store";
+import { deleteItem, updateCart } from "../features/cart/cartSlice";
 import { handleError } from "../utils/helpers";
-import { getSingleProduct } from "./apiProducts";
 
 // Read all rows
 export async function getAllCartItems() {
@@ -33,12 +32,10 @@ export async function getCartItems(user_id) {
 //   console.log(data);
 // }
 
-export async function addItemToCart(id, q) {
+export function addItemToCart(id, q, price) {
   const { cart } = store.getState().cart;
   const alreadyAdded = cart.filter((item) => item.product_id === id).length > 0;
   if (alreadyAdded) return;
-
-  const { price } = await getSingleProduct(id);
 
   const cartItem = {
     product_id: id,

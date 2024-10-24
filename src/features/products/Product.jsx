@@ -107,8 +107,7 @@ export default function Product() {
   const [quantity, setQuantity] = useState(1);
 
   function addToCart() {
-    addItemToCart(id, quantity);
-    console.log(id, quantity);
+    addItemToCart(id, quantity, price);
   }
 
   return (
