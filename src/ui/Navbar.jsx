@@ -25,7 +25,6 @@ const StyledUl = styled.ul`
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   position: relative;
-  border: 1px solid green;
 
   svg {
     width: 2.4rem;
@@ -44,8 +43,8 @@ const StyledNavLink = styled(NavLink)`
   span {
     display: block;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -0.8rem;
+    right: -0.8rem;
     border-radius: 50%;
     font-weight: 700;
     background: red;

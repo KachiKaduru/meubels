@@ -1,19 +1,20 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
+
 import AppLayout from "./ui/AppLayout";
-import Home, { loader as homeLoader } from "./pages/Home";
 import Notifications from "./pages/Notifications";
-import Cart, { action as cartAction, loader as cartLoader } from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Favorite from "./pages/Favorite";
+import ErrorPage from "./pages/ErrorPage";
+import Home, { loader as homeLoader } from "./pages/Home";
 import Login, { action as loginAction } from "./pages/Login";
 import SignUp, { action as signupAction } from "./pages/SignUp";
-import ErrorPage from "./pages/ErrorPage";
+import Cart, { action as cartAction, loader as cartLoader } from "./pages/Cart";
+
 import Product, { loader as productLoader } from "./features/products/Product";
 import CheckOut, { action as checkoutAction } from "./features/order/CheckOut";
 import Success from "./pages/Success";
 import Orders from "./features/user/Orders";
-import CategoriesList from "./features/homepage/CategoriesList";
 
 const router = createBrowserRouter([
   {

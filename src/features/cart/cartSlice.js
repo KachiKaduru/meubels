@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // cart: [{ id: 1, product_id: "8f28bdf4-b108-4ba4-9b4c-b0e27a6b746d" }],
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   totalCartPrice: 0,
 };
@@ -24,6 +23,10 @@ const cartSlice = createSlice({
         product.quantity = newQuantity;
         product.totalPrice = product.unitPrice * newQuantity;
       }
+    },
+
+    deleteItem(state, action) {
+      state.cart = state.cart.filter((item) => item.product_id !== action.payload);
     },
   },
 });

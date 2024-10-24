@@ -51,7 +51,6 @@ export async function addItemToCart(id, q) {
   localStorage.setItem("cart", JSON.stringify([...cart, cartItem]));
 }
 
-// function increaseCartQuantity(id, q) {
-//   const { cart } = store.getState().cart;
-//   const item = cart.filter((item) => item.product_id === id);
-// }
+export function deleteItemFromCart(id) {
+  store.dispatch(deleteItem(id));
+}
