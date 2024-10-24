@@ -23,6 +23,7 @@ const StyledUserDisplay = styled.div`
   .details {
     h2 {
       font-size: 2rem;
+      text-transform: capitalize;
     }
 
     p {
@@ -32,7 +33,10 @@ const StyledUserDisplay = styled.div`
   }
 `;
 
-export default function UserDisplay() {
+export default function UserDisplay({ username }) {
+  console.log(username);
+  const [firstName] = username?.split(" ", 2);
+
   return (
     <StyledUserDisplay>
       <div className="imgContainer">
@@ -40,7 +44,8 @@ export default function UserDisplay() {
       </div>
 
       <div className="details">
-        <h2>Kachi Kaduru</h2>
+        <h2> hello, {firstName}</h2>
+        {/* <h2>Kachi Kaduru</h2> */}
         <p>kach@gmail.com</p>
       </div>
     </StyledUserDisplay>

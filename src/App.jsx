@@ -3,12 +3,12 @@ import GlobalStyles from "./styles/GlobalStyles";
 
 import AppLayout from "./ui/AppLayout";
 import Notifications from "./pages/Notifications";
-import Profile from "./pages/Profile";
 import Favorite from "./pages/Favorite";
 import ErrorPage from "./pages/ErrorPage";
 import Home, { loader as homeLoader } from "./pages/Home";
 import Login, { action as loginAction } from "./pages/Login";
 import SignUp, { action as signupAction } from "./pages/SignUp";
+import Profile, { loader as profileLoader } from "./pages/Profile";
 import Cart, { action as cartAction, loader as cartLoader } from "./pages/Cart";
 
 import Product, { loader as productLoader } from "./features/products/Product";
@@ -38,6 +38,7 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+        loader: profileLoader,
       },
       {
         path: "/cart",

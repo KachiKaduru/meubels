@@ -1,15 +1,10 @@
 import supabase from "../../supabase";
+import store from "../store";
 import { handleError } from "../utils/helpers";
 import { updateUserId } from "../features/user/userSlice";
-import store from "../store";
+import { addNewProfile } from "./apiProfiles";
 
-export async function guestUser() {
-  const { data, error } = await supabase.auth.signInAnonymously();
-  handleError(error);
-  console.log(data);
-}
-
-export async function signUp(userEmail, userPassword) {
+export async function signUp(userName, userEmail, userPassword) {
   const { data, error } = await supabase.auth.signUp({
     email: userEmail,
     password: userPassword,
@@ -20,6 +15,7 @@ export async function signUp(userEmail, userPassword) {
 
   localStorage.setItem("user_id", data.user.id);
   store.dispatch(updateUserId(data.user.id));
+  addNewProfile(userName, userEmail, data.user.id);
 
   return data;
 }
@@ -44,7 +40,7 @@ export async function logout() {
   handleError(error);
 
   localStorage.removeItem("user_id");
-  dispatch(updateUserId(""));
+  store.dispatch(updateUserId(""));
 }
 
 export async function forgotPassword(email) {

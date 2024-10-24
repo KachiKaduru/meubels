@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Button from "../../ui/Button";
 import { Form, Link } from "react-router-dom";
-import { useState } from "react";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -46,8 +45,15 @@ const StyledForm = styled(Form)`
       text-decoration: none;
     }
   }
+
+  .error {
+    color: red;
+    padding: 0.4rem;
+    font-size: 1.4rem;
+    text-align: left;
+  }
 `;
-export default function AccountForm({ type = "signup" }) {
+export default function AccountForm({ type = "signup", formError }) {
   // const [username, setUsername] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -80,6 +86,7 @@ export default function AccountForm({ type = "signup" }) {
         <label htmlFor="">
           <legend>Confirm Password</legend>
           <input type="password" name="confirmPassword" required />
+          {formError?.passwordError && <p className="error">{formError.passwordError}</p>}
         </label>
       )}
 

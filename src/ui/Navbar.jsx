@@ -51,6 +51,8 @@ const StyledNavLink = styled(NavLink)`
 
 export default function Navbar() {
   const cart = useSelector((state) => state.cart.cart);
+  const user = useSelector((state) => state.user);
+  const userId = user.user_id;
 
   return (
     <nav>
@@ -62,9 +64,11 @@ export default function Navbar() {
           {cart.length > 0 ? <span>{cart.length}</span> : null}
           <HiOutlineShoppingCart />
         </StyledNavLink>
-        <StyledNavLink to="/notifications">
-          <HiOutlineBell />
-        </StyledNavLink>
+        {userId && (
+          <StyledNavLink to="/notifications">
+            <HiOutlineBell />
+          </StyledNavLink>
+        )}
         <StyledNavLink to="/profile">
           <HiOutlineUser />
         </StyledNavLink>

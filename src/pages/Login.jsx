@@ -14,7 +14,6 @@ const StyledLogin = styled.section`
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
 
   const { email, password } = data;
   login(email, password);
@@ -31,7 +30,7 @@ export default function Login() {
 
       <AccountHeading>welcome back!</AccountHeading>
 
-      <AccountForm type="login" />
+      <AccountForm type="login" formError={formError} />
     </StyledLogin>
   );
 }
