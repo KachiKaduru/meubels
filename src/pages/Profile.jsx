@@ -21,7 +21,6 @@ const Section = styled.section`
 
 export async function loader() {
   const user_id = store.getState().user.user_id;
-
   if (!user_id) return null;
 
   const username = await getProfileName(user_id);

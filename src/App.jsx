@@ -12,7 +12,10 @@ import Profile, { loader as profileLoader } from "./pages/Profile";
 import Cart, { action as cartAction, loader as cartLoader } from "./pages/Cart";
 
 import Product, { loader as productLoader } from "./features/products/Product";
-import CheckOut, { action as checkoutAction } from "./features/order/CheckOut";
+import CheckOut, {
+  action as checkoutAction,
+  loader as checkoutLoader,
+} from "./features/order/CheckOut";
 import Success from "./pages/Success";
 import Orders from "./features/user/Orders";
 
@@ -39,6 +42,7 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
         loader: profileLoader,
+        errorElement: <ErrorPage />,
       },
       {
         path: "/cart",
@@ -55,6 +59,7 @@ const router = createBrowserRouter([
         path: "/checkout",
         element: <CheckOut />,
         action: checkoutAction,
+        loader: checkoutLoader,
       },
       {
         path: "/signup",

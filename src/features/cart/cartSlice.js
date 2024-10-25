@@ -9,11 +9,14 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    calcTotalPrice(state, action) {
-      state.totalPrice = state.totalPrice + action.payload;
+    updateTotalCartPrice(state) {
+      state.totalCartPrice = state.cart.reduce((total, item) => total + item.total_price, 0);
     },
     updateCart(state, action) {
       state.cart = [...state.cart, action.payload];
+    },
+    updateCartWithSupabaseCart(state, action) {
+      state.cart = [...state.cart, ...action.payload];
     },
     updateItemQuantity(state, action) {
       const { id, newQuantity } = action.payload;
@@ -21,16 +24,25 @@ const cartSlice = createSlice({
 
       if (product) {
         product.quantity = newQuantity;
-        product.totalPrice = product.unitPrice * newQuantity;
+        product.total_price = product.unit_price * newQuantity;
       }
+
+      state.totalCartPrice = state.cart.reduce((total, item) => total + item.total_price, 0);
     },
 
     deleteItem(state, action) {
       state.cart = state.cart.filter((item) => item.product_id !== action.payload);
+      state.totalCartPrice = state.cart.reduce((total, item) => total + item.total_price, 0);
     },
   },
 });
 
-export const { calcTotalPrice, updateCart, updateItemQuantity, deleteItem } = cartSlice.actions;
+export const {
+  updateTotalCartPrice,
+  updateCart,
+  updateCartWithSupabaseCart,
+  updateItemQuantity,
+  deleteItem,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

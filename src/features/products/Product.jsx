@@ -11,6 +11,7 @@ import BackButton from "../../ui/BackButton";
 import Button from "../../ui/Button";
 import Display from "../../ui/Display";
 import CurrentQuantity from "../../ui/CurrentQuantity";
+import { updateTotalCartPrice } from "../cart/cartSlice";
 
 const StyledProduct = styled.div`
   display: grid;

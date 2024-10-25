@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import ProductsDisplay from "../features/homepage/ProductsDisplay";
 import BarHeader from "../ui/BarHeader";
@@ -7,7 +7,6 @@ import Navbar from "../ui/Navbar";
 import Display from "../ui/Display";
 import Layout from "../ui/Layout";
 import { getProducts } from "../services/apiProducts";
-import { useSelector } from "react-redux";
 import FavoritesComponent from "../features/cart/FavoritesComponent";
 
 const Div = styled.div`
@@ -26,12 +25,11 @@ const Div = styled.div`
 
 export async function loader() {
   const products = await getProducts();
-  return products;
+  return { products };
 }
 
 export default function Home() {
-  const products = useLoaderData();
-  const user = useSelector((state) => state.user);
+  const { products } = useLoaderData();
 
   return (
     <section>

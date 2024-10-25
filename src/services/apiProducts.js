@@ -18,10 +18,17 @@ export async function insertProducts(mainArray) {
 }
 
 export async function getSingleProduct(id) {
-  // const { data, error } = await supabase.from("shelves").select(id);
   const { data, error } = await supabase.from("products").select("*").eq("id", id);
   handleError(error);
 
   const item = data[0];
+  return item;
+}
+
+export async function getProductName(productId) {
+  const { data, error } = await supabase.from("products").select("*").eq("id", productId);
+  handleError(error);
+
+  const item = data[0].name;
   return item;
 }

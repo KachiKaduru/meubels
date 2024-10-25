@@ -22,12 +22,13 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default function CurrentQuantity({ setOuterQuantity, cartQuantity }) {
+export default function CurrentQuantity({ setOuterQuantity, cartQuantity, productId }) {
   const [quantity, setQuantity] = useState(cartQuantity || 1);
 
   function handleIncrease(q) {
     if (quantity > 9) return;
     setQuantity(q + 1);
+
     if (cartQuantity) {
       setOuterQuantity(cartQuantity + 1);
     } else {
@@ -38,6 +39,7 @@ export default function CurrentQuantity({ setOuterQuantity, cartQuantity }) {
   function handleDecrease(q) {
     if (quantity === 1) return;
     setQuantity(q - 1);
+
     if (cartQuantity) {
       setOuterQuantity(cartQuantity - 1);
     } else {
@@ -47,7 +49,9 @@ export default function CurrentQuantity({ setOuterQuantity, cartQuantity }) {
 
   return (
     <StyledDiv>
-      <button onClick={() => handleDecrease(quantity)}>-</button>
+      <button disabled={quantity === 1} onClick={() => handleDecrease(quantity)}>
+        -
+      </button>
       <span>0{quantity}</span>
       <button onClick={() => handleIncrease(quantity)}>+</button>
     </StyledDiv>

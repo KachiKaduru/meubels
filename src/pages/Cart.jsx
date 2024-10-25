@@ -9,6 +9,9 @@ import Item from "../ui/Item";
 import Button from "../ui/Button";
 import Layout from "../ui/Layout";
 import Display from "../ui/Display";
+import { updateTotalCartPrice } from "../features/cart/cartSlice";
+import store from "../store";
+import { insertItemsToCart } from "../services/apiCart";
 
 const Bottom = styled.footer`
   padding: 1rem 0.5rem;
@@ -34,27 +37,25 @@ const Bottom = styled.footer`
 `;
 
 export async function loader() {
-  // const userId = getUserId();
-  // if (userId === null) return;
-  // const cart = await getCartItems(userId);
-  // return { cart };
+  store.dispatch(updateTotalCartPrice());
   return null;
 }
 
 export async function action({ request }) {
+  const userId = getUserId();
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
+  const cart = JSON.parse(data.cart);
 
-  const userId = getUserId();
   if (!userId) return redirect("/signup");
 
+  insertItemsToCart(cart, userId);
   return redirect("/checkout");
 }
 
 export default function Cart() {
   const cart = useSelector((state) => state.cart.cart);
-  const totalCartPrice = cart.reduce((total, item) => total + item.totalPrice, 0);
+  const totalCartPrice = useSelector((state) => state.cart.totalCartPrice);
 
   return (
     <section>
@@ -72,7 +73,7 @@ export default function Cart() {
               key={item.product_id}
               productId={item.product_id}
               productQuantity={item.quantity}
-              productPrice={item.totalPrice}
+              productPrice={item.total_price}
             />
           ))}
         </Display>
@@ -83,7 +84,7 @@ export default function Cart() {
               <h3 className="price">$ {totalCartPrice}.00 </h3>
             </aside>
 
-            <Form method="">
+            <Form method="POST">
               <input type="hidden" name="cart" value={JSON.stringify(cart)} />
               <Button padding="large">Check out</Button>
             </Form>

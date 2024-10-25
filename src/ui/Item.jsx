@@ -122,7 +122,11 @@ export default function Item({ type = "cart", productId, productQuantity, produc
         </span>
 
         {type === "cart" && (
-          <CurrentQuantity cartQuantity={productQuantity} setOuterQuantity={setItemQuantity} />
+          <CurrentQuantity
+            cartQuantity={productQuantity}
+            setOuterQuantity={setItemQuantity}
+            productId={productId}
+          />
         )}
       </div>
 

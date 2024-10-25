@@ -34,7 +34,7 @@ const StyledUserDisplay = styled.div`
 `;
 
 export default function UserDisplay({ username }) {
-  console.log(username);
+  // console.log(username);
   const [firstName] = username?.split(" ", 2);
 
   return (
