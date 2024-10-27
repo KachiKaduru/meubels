@@ -3,9 +3,12 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import { HiOutlineShoppingCart } from "react-icons/hi2";
+import { HiHome } from "react-icons/hi2";
 import { HiOutlineHome } from "react-icons/hi2";
 import { HiOutlineUser } from "react-icons/hi2";
 import { HiOutlineBell } from "react-icons/hi2";
+
+import userImg from "../data/images/user.svg";
 
 const StyledUl = styled.ul`
   display: flex;
@@ -19,18 +22,28 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   position: relative;
 
+  img {
+    /* background-color: red; */
+
+    &:hover {
+      filter: invert(1);
+      mix-blend-mode: color-dodge;
+    }
+  }
+
   svg {
     width: 2.4rem;
     height: 2.4rem;
-    color: var(--grey-color);
+    stroke: var(--text-color);
+    /* fill: none; */
   }
 
   &:hover svg,
   &:active svg,
   &.active:link svg,
   &.active:visited svg {
-    color: white;
-    background-color: var(--black-color);
+    fill: var(--primary-color);
+    stroke: var(--grey-color);
   }
 
   span {
@@ -58,6 +71,8 @@ export default function Navbar() {
     <nav>
       <StyledUl>
         <StyledNavLink to="/">
+          {/* <HiHome /> */}
+
           <HiOutlineHome />
         </StyledNavLink>
         <StyledNavLink to="/cart">
@@ -71,6 +86,7 @@ export default function Navbar() {
         )}
         <StyledNavLink to="/profile">
           <HiOutlineUser />
+          {/* <img src={userImg} alt="" /> */}
         </StyledNavLink>
       </StyledUl>
     </nav>

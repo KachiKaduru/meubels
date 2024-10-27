@@ -42,11 +42,6 @@ nav{
   /* } */
 }
 
-
-.active{
-    
-}
-
 `;
 
 export default GlobalStyles;
