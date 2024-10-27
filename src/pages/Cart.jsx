@@ -12,6 +12,7 @@ import Display from "../ui/Display";
 import { updateTotalCartPrice } from "../features/cart/cartSlice";
 import store from "../store";
 import { insertItemsToCart } from "../services/apiCart";
+import Navbar from "../ui/Navbar";
 
 const Bottom = styled.footer`
   padding: 1rem 0.5rem;
@@ -49,6 +50,9 @@ export async function action({ request }) {
 
   if (!userId) return redirect("/signup");
 
+  // console.log(cart);
+  // return null;
+
   insertItemsToCart(cart, userId);
   return redirect("/checkout");
 }
@@ -77,7 +81,7 @@ export default function Cart() {
             />
           ))}
         </Display>
-        {cart.length > 0 && (
+        {cart.length > 0 ? (
           <Bottom>
             <aside className="total">
               <h3>Total: </h3>
@@ -89,6 +93,8 @@ export default function Cart() {
               <Button padding="large">Check out</Button>
             </Form>
           </Bottom>
+        ) : (
+          <Navbar />
         )}
       </Layout>
     </section>

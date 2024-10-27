@@ -2,7 +2,7 @@ export function createUser(user) {}
 
 // Add to favorites (guest mode)
 
-export function addToFavoritesGuest(product_id) {
+function addToFavoritesGuest(product_id) {
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   if (!favorites.includes(product_id)) {
     favorites.push(product_id);
@@ -11,7 +11,7 @@ export function addToFavoritesGuest(product_id) {
 }
 
 // Add to cart (guest mode)
-export function addToCartGuest(product_id, quantity = 1) {
+function addToCartGuest(product_id, quantity = 1) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let itemIndex = cart.findIndex((item) => item.product_id === product_id);
   if (itemIndex === -1) {

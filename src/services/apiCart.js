@@ -72,17 +72,6 @@ export async function insertItemsToCart(cart, userId) {
   }
 }
 
-export async function getOrderCartWithProductNames(cartArray) {
-  const cartWithNames = await Promise.all(
-    cartArray.map(async (item) => {
-      const product_name = await getProductName(item.product_id);
-      return { ...item, product_name }; // Add product_name to the item
-    })
-  );
-
-  return cartWithNames;
-}
-
 export async function deleteItemFromSupabaseCart(user_id, product_id) {
   const { error } = await supabase
     .from("cart")
@@ -91,4 +80,47 @@ export async function deleteItemFromSupabaseCart(user_id, product_id) {
     .eq("product_id", product_id);
 
   handleError(error);
+}
+
+export async function updateSupabaseCartItem(userId, productId, newQuantity) {
+  try {
+    const userCart = await getCartItems();
+    console.log(userCart);
+
+    // Retrieve the current unit price for the item
+    const { data: itemData, error: fetchError } = await supabase
+      .from("cart")
+      .select("unit_price")
+      .eq("user_id", userId)
+      .eq("product_id", productId)
+      .single();
+
+    if (!itemData) return;
+
+    // if (fetchError || !itemData) {
+    //   throw fetchError || new Error("Item not found in cart");
+    // }
+
+    // Calculate the new total price
+    const newTotalPrice = itemData.unit_price * newQuantity;
+
+    // Update the quantity and total price in Supabase
+    const { data: updatedItem, error: updateError } = await supabase
+      .from("cart")
+      .update({
+        quantity: newQuantity,
+        total_price: newTotalPrice,
+      })
+      .eq("user_id", userId)
+      .eq("product_id", productId);
+
+    if (updateError) {
+      throw updateError;
+    }
+
+    return { data: updatedItem[0], error: null };
+  } catch (error) {
+    console.error("Error updating cart item in Supabase:", error.message);
+    return { data: null, error: error.message };
+  }
 }

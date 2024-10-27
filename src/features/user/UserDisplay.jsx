@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import img from "../../data/images/product-2.png";
+import { useState } from "react";
 
 const StyledUserDisplay = styled.div`
   display: flex;
@@ -33,9 +34,9 @@ const StyledUserDisplay = styled.div`
   }
 `;
 
-export default function UserDisplay({ username }) {
-  // console.log(username);
-  const [firstName] = username?.split(" ", 2);
+export default function UserDisplay({ username, userEmail }) {
+  const [name] = useState(username || "");
+  const [email] = useState(userEmail || "");
 
   return (
     <StyledUserDisplay>
@@ -44,9 +45,9 @@ export default function UserDisplay({ username }) {
       </div>
 
       <div className="details">
-        <h2> hello, {firstName}</h2>
+        <h2> hello{`${name ? ` ${name}` : " there,"}`}</h2>
         {/* <h2>Kachi Kaduru</h2> */}
-        <p>kach@gmail.com</p>
+        <p>{email}</p>
       </div>
     </StyledUserDisplay>
   );

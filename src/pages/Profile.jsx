@@ -9,7 +9,7 @@ import Layout from "../ui/Layout";
 import Navbar from "../ui/Navbar";
 import Display from "../ui/Display";
 import store from "../store";
-import { getProfileName } from "../services/apiProfiles";
+import { getProfileEmail, getProfileName } from "../services/apiProfiles";
 import { useLoaderData } from "react-router-dom";
 
 const Section = styled.section`
@@ -21,14 +21,21 @@ const Section = styled.section`
 
 export async function loader() {
   const user_id = store.getState().user.user_id;
-  if (!user_id) return null;
 
-  const username = await getProfileName(user_id);
-  return { username };
+  if (!user_id) {
+    return null;
+  } else {
+    const username = await getProfileName(user_id);
+    const userEmail = await getProfileEmail(user_id);
+    return { username, userEmail };
+  }
+  // return user_id;
 }
 
 export default function Profile() {
-  const { username } = useLoaderData();
+  const loaderData = useLoaderData();
+  const username = loaderData?.username;
+  const userEmail = loaderData?.userEmail;
 
   return (
     <section>
@@ -40,7 +47,7 @@ export default function Profile() {
         </BarHeader>
 
         <Display>
-          <UserDisplay username={username} />
+          <UserDisplay username={username} userEmail={userEmail} />
 
           <Section>
             {profileSections.map((section) => (

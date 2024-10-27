@@ -19,3 +19,9 @@ export async function getProfileName(id) {
   handleError(error);
   return data[0]?.name;
 }
+export async function getProfileEmail(id) {
+  const { data, error } = await supabase.from("profiles").select("email").eq("user_id", id);
+
+  handleError(error);
+  return data[0]?.email;
+}

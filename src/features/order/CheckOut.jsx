@@ -3,7 +3,8 @@ import { Form, redirect, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
 
 import { getProfileName } from "../../services/apiProfiles";
-import { getCartItems, getOrderCartWithProductNames } from "../../services/apiCart";
+import { deleteItemFromSupabaseCart, getCartItems } from "../../services/apiCart";
+import { getOrderCartWithProductNames, submitOrder } from "../../services/apiOrders";
 import { calculateDeliveryPrice, generateOrderId, getUserId } from "../../utils/helpers";
 import BarHeader from "../../ui/BarHeader";
 import BackButton from "../../ui/BackButton";
@@ -73,20 +74,13 @@ export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
-  const { name } = data;
   const cart = JSON.parse(data.cart);
-  const priceList = JSON.parse(data.priceList);
+  // const priceList = JSON.parse(data.priceList);
 
-  console.log(name, cart, priceList);
-
-  // const orderItems = {
-  //   product_name: "",
-  //   quantity: "",
-  //   price: "",
-  // };
+  // console.log(cart, priceList);
 
   const orderItems = await getOrderCartWithProductNames(cart);
-  console.log(orderItems);
+  // console.log(orderItems);
 
   const orderId = generateOrderId();
 
@@ -94,12 +88,17 @@ export async function action({ request }) {
     order_id: orderId,
     user_id,
     order_items: orderItems,
-    total_price: "",
+    total_price: orderItems.reduce((total, item) => total + item.total_price, 0),
     user_name: data.name,
   };
 
-  return null;
-  // return redirect("/success");
+  // console.log(newOrder);
+  submitOrder(newOrder);
+
+  cart.forEach((item) => deleteItemFromSupabaseCart(item.user_id, item.product_id));
+
+  // return null;
+  return redirect("/success");
 }
 
 export default function CheckOut() {
