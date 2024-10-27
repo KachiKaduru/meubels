@@ -28,12 +28,17 @@ export default function CurrentQuantity({ setOuterQuantity, cartQuantity, produc
   const [quantity, setQuantity] = useState(cartQuantity || 1);
   const user_id = getUserId();
 
-  async function handleItemUpdate(productId, currentQuantity, change) {
+  // async function handleItemUpdate(productId, currentQuantity, change) {
+  //   if (!user_id) return;
+
+  //   const newQuantity = currentQuantity + change;
+  //   const result = await updateSupabaseCartItem(user_id, productId, newQuantity);
+  //   handleError(result.error);
+  // }
+  function handleItemUpdate(diff) {
     if (!user_id) return;
 
-    const newQuantity = currentQuantity + change;
-    const result = await updateSupabaseCartItem(user_id, productId, newQuantity);
-    handleError(result.error);
+    updateSupabaseCartItem(user_id, productId, diff);
   }
 
   function handleIncrease(q) {
@@ -42,7 +47,7 @@ export default function CurrentQuantity({ setOuterQuantity, cartQuantity, produc
 
     if (cartQuantity) {
       setOuterQuantity(cartQuantity + 1);
-      handleItemUpdate(productId, cartQuantity, +1);
+      handleItemUpdate(+1);
     } else {
       setOuterQuantity(q + 1);
     }
@@ -54,7 +59,7 @@ export default function CurrentQuantity({ setOuterQuantity, cartQuantity, produc
 
     if (cartQuantity) {
       setOuterQuantity(cartQuantity - 1);
-      handleItemUpdate(productId, cartQuantity, -1);
+      handleItemUpdate(-1);
     } else {
       setOuterQuantity(q - 1);
     }

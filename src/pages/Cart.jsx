@@ -2,16 +2,16 @@ import { Form, redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
+import store from "../store";
+import { getCartItems, insertItemsToCart, syncCartWithSupabase } from "../services/apiCart";
 import { getUserId } from "../utils/helpers";
+import { updateTotalCartPrice } from "../features/cart/cartSlice";
 import BackButton from "../ui/BackButton";
 import BarHeader from "../ui/BarHeader";
 import Item from "../ui/Item";
 import Button from "../ui/Button";
 import Layout from "../ui/Layout";
 import Display from "../ui/Display";
-import { updateTotalCartPrice } from "../features/cart/cartSlice";
-import store from "../store";
-import { insertItemsToCart } from "../services/apiCart";
 import Navbar from "../ui/Navbar";
 
 const Bottom = styled.footer`
@@ -50,11 +50,12 @@ export async function action({ request }) {
 
   if (!userId) return redirect("/signup");
 
-  // console.log(cart);
-  // return null;
+  syncCartWithSupabase(cart, userId);
 
-  insertItemsToCart(cart, userId);
-  return redirect("/checkout");
+  const updatedCart = await getCartItems(userId);
+  const totalCartPrice = updatedCart.reduce((total, item) => total + item.total_price, 0);
+
+  return redirect("/checkout", { state: { totalCartPrice } });
 }
 
 export default function Cart() {
