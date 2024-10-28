@@ -13,6 +13,12 @@ export async function addNewProfile(userName, userEmail, userId) {
   return data;
 }
 
+export async function getProfile(id) {
+  const { data, error } = await supabase.from("profiles").select("*").eq("user_id", id);
+
+  handleError(error);
+  return data[0];
+}
 export async function getProfileName(id) {
   const { data, error } = await supabase.from("profiles").select("name").eq("user_id", id);
 

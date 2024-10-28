@@ -4,7 +4,8 @@ import { handleError } from "../utils/helpers";
 import { updateUserId } from "../features/user/userSlice";
 import { addNewProfile } from "./apiProfiles";
 import { getCartItems } from "./apiCart";
-import { updateCart } from "../features/cart/cartSlice";
+import { clearCart, updateCart } from "../features/cart/cartSlice";
+import { redirect } from "react-router-dom";
 
 export async function signUp(userName, userEmail, userPassword) {
   const { data, error } = await supabase.auth.signUp({
@@ -42,6 +43,7 @@ export async function logout() {
 
   localStorage.removeItem("user_id");
   store.dispatch(updateUserId(""));
+  store.dispatch(clearCart());
 }
 
 export async function forgotPassword(email) {

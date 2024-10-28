@@ -26,3 +26,16 @@ export function calculateDeliveryPrice(price) {
   const deliveryPrice = Math.floor(price * 0.07);
   return deliveryPrice;
 }
+
+export function formatDate(dateString) {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "short", // "Tue"
+    day: "2-digit", // "20"
+    month: "short", // "Oct"
+    year: "numeric", // "2024"
+    hour: "2-digit", // "11"
+    minute: "2-digit", // "14"
+    hour12: true, // AM/PM format
+  }).format(date);
+}

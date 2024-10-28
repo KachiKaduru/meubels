@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
 
 import AppLayout from "./ui/AppLayout";
-import Notifications from "./pages/Notifications";
+import Notifications, { loader as notificationLoader } from "./pages/Notifications";
 import Favorite from "./pages/Favorite";
 import ErrorPage from "./pages/ErrorPage";
 import Home, { loader as homeLoader } from "./pages/Home";
@@ -17,6 +17,7 @@ import CheckOut, {
   loader as checkoutLoader,
 } from "./features/order/CheckOut";
 import Orders from "./features/user/Orders";
+import Settings, { loader as settingsLoader } from "./features/user/Settings";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/notifications",
         element: <Notifications />,
+        loader: notificationLoader,
       },
       {
         path: "/profile",
@@ -77,8 +79,14 @@ const router = createBrowserRouter([
         loader: successLoader,
       },
       {
-        path: "/orders",
+        path: "profile/orders",
         element: <Orders />,
+      },
+
+      {
+        path: "profile/settings",
+        element: <Settings />,
+        loader: settingsLoader,
       },
     ],
   },

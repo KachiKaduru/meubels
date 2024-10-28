@@ -35,6 +35,7 @@ export default function Orders() {
       </BarHeader>
 
       <div className="container">
+        <StyledNavlink>All</StyledNavlink>
         <StyledNavlink>Delivered</StyledNavlink>
         <StyledNavlink>Processing</StyledNavlink>
         <StyledNavlink>Cancelled</StyledNavlink>

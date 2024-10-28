@@ -14,13 +14,9 @@ export const profileSections = [
     title: "payment method",
     route: "payments",
   },
+
   {
     id: 4,
-    title: "my reviews",
-    route: "reviews",
-  },
-  {
-    id: 5,
     title: "settings",
     route: "settings",
   },
