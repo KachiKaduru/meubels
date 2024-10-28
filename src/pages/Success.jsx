@@ -2,6 +2,9 @@ import styled from "styled-components";
 import img0 from "../data/images/success-0.png";
 import img1 from "../data/images/success-1.svg";
 import Button from "../ui/Button";
+import { getUserOrders } from "../services/apiOrders";
+import { getUserId } from "../utils/helpers";
+import { useLoaderData } from "react-router-dom";
 
 const StyledSection = styled.section`
   padding-top: 7rem;
@@ -9,6 +12,11 @@ const StyledSection = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+
+  h1 {
+    font-size: 3.6rem;
+    font-family: "Merriweather", sans-serif;
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -24,7 +32,14 @@ const ImgContainer = styled.div`
   }
 `;
 
+export async function loader() {
+  const userId = getUserId();
+  const orders = await getUserOrders(userId);
+  return { orders };
+}
+
 export default function Success() {
+  const { orders } = useLoaderData();
   return (
     <StyledSection>
       <h1>SUCCESS!</h1>

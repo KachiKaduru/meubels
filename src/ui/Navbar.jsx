@@ -3,12 +3,16 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { HiHome } from "react-icons/hi2";
-import { HiOutlineHome } from "react-icons/hi2";
-import { HiOutlineUser } from "react-icons/hi2";
-import { HiOutlineBell } from "react-icons/hi2";
+import { HiShoppingCart } from "react-icons/hi2";
 
-import userImg from "../data/images/user.svg";
+import { HiHome } from "react-icons/hi2";
+import homeImg from "../data/images/home.svg";
+
+import { HiOutlineUser } from "react-icons/hi2";
+import { HiUser } from "react-icons/hi2";
+
+import { HiOutlineBell } from "react-icons/hi2";
+import { HiBell } from "react-icons/hi2";
 
 const StyledUl = styled.ul`
   display: flex;
@@ -21,21 +25,13 @@ const StyledUl = styled.ul`
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   position: relative;
-
-  img {
-    /* background-color: red; */
-
-    &:hover {
-      filter: invert(1);
-      mix-blend-mode: color-dodge;
-    }
-  }
+  width: 2.5rem;
+  height: 2.5rem;
 
   svg {
     width: 2.4rem;
     height: 2.4rem;
-    stroke: var(--text-color);
-    /* fill: none; */
+    stroke: var(--grey-color);
   }
 
   &:hover svg,
@@ -43,10 +39,10 @@ const StyledNavLink = styled(NavLink)`
   &.active:link svg,
   &.active:visited svg {
     fill: var(--primary-color);
-    stroke: var(--grey-color);
+    stroke: var(--primary-color);
   }
 
-  span {
+  aside {
     display: block;
     position: absolute;
     top: -0.8rem;
@@ -71,22 +67,24 @@ export default function Navbar() {
     <nav>
       <StyledUl>
         <StyledNavLink to="/">
-          {/* <HiHome /> */}
-
-          <HiOutlineHome />
+          {({ isActive }) => (isActive ? <HiHome /> : <img src={homeImg} />)}
         </StyledNavLink>
+
         <StyledNavLink to="/cart">
-          {cart.length > 0 ? <span>{cart.length}</span> : null}
-          <HiOutlineShoppingCart />
+          {({ isActive }) => (
+            <>
+              {isActive ? <HiShoppingCart /> : <HiOutlineShoppingCart />}
+              {cart.length > 0 && <aside>{cart.length}</aside>}
+            </>
+          )}
         </StyledNavLink>
         {userId && (
           <StyledNavLink to="/notifications">
-            <HiOutlineBell />
+            {({ isActive }) => (isActive ? <HiBell /> : <HiOutlineBell />)}
           </StyledNavLink>
         )}
         <StyledNavLink to="/profile">
-          <HiOutlineUser />
-          {/* <img src={userImg} alt="" /> */}
+          {({ isActive }) => (isActive ? <HiUser /> : <HiOutlineUser />)}
         </StyledNavLink>
       </StyledUl>
     </nav>

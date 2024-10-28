@@ -2,7 +2,6 @@ import supabase from "../../supabase";
 import store from "../store";
 import { deleteItem, updateCart } from "../features/cart/cartSlice";
 import { getUserId, handleError } from "../utils/helpers";
-import { getProductName } from "./apiProducts";
 
 //REDUX CART FUNCTIONS
 export function addItemToCart(id, q, price) {

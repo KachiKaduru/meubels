@@ -51,7 +51,13 @@ export default function ShippingAddress({ username }) {
       <div>
         <input type="text" name="name" placeholder="name" defaultValue={username} />
         <hr />
-        <textarea name="deliveryAddress" required placeholder="address here" rows={3}></textarea>
+        <textarea
+          name="deliveryAddress"
+          required
+          placeholder="address here"
+          rows={3}
+          defaultValue={"Lagos, Nigeria"}
+        ></textarea>
       </div>
     </StyledShipping>
   );

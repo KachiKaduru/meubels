@@ -15,9 +15,6 @@ const cartSlice = createSlice({
     updateCart(state, action) {
       state.cart = [...state.cart, action.payload];
     },
-    updateCartWithSupabaseCart(state, action) {
-      state.cart = [...state.cart, ...action.payload];
-    },
     updateItemQuantity(state, action) {
       const { id, newQuantity } = action.payload;
       const product = state.cart.find((item) => item.product_id === id);
@@ -29,20 +26,17 @@ const cartSlice = createSlice({
 
       state.totalCartPrice = state.cart.reduce((total, item) => total + item.total_price, 0);
     },
-
     deleteItem(state, action) {
       state.cart = state.cart.filter((item) => item.product_id !== action.payload);
       state.totalCartPrice = state.cart.reduce((total, item) => total + item.total_price, 0);
     },
+    clearCart(state) {
+      state.cart = [];
+    },
   },
 });
 
-export const {
-  updateTotalCartPrice,
-  updateCart,
-  updateCartWithSupabaseCart,
-  updateItemQuantity,
-  deleteItem,
-} = cartSlice.actions;
+export const { updateTotalCartPrice, updateCart, updateItemQuantity, deleteItem, clearCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

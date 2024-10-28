@@ -4,7 +4,7 @@ import { handleError } from "../utils/helpers";
 import { updateUserId } from "../features/user/userSlice";
 import { addNewProfile } from "./apiProfiles";
 import { getCartItems } from "./apiCart";
-import { updateCartWithSupabaseCart } from "../features/cart/cartSlice";
+import { updateCart } from "../features/cart/cartSlice";
 
 export async function signUp(userName, userEmail, userPassword) {
   const { data, error } = await supabase.auth.signUp({
@@ -18,8 +18,6 @@ export async function signUp(userName, userEmail, userPassword) {
   localStorage.setItem("user_id", data.user.id);
   store.dispatch(updateUserId(data.user.id));
   addNewProfile(userName, userEmail, data.user.id);
-
-  // return data;
 }
 
 export async function login(userEmail, userPassword) {
@@ -35,7 +33,7 @@ export async function login(userEmail, userPassword) {
   store.dispatch(updateUserId(data.user.id));
 
   const newCart = await getCartItems(data.user.id);
-  store.dispatch(updateCartWithSupabaseCart(newCart));
+  store.dispatch(updateCart(newCart));
 }
 
 export async function logout() {
@@ -56,7 +54,6 @@ export async function updateUser(userEmail, newPassword) {
   const { data, error } = await supabase.auth.updateUser({
     email: userEmail,
     password: newPassword,
-    // data: { hello: "world" },
   });
 
   handleError(error);

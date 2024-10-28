@@ -2,11 +2,6 @@ import supabase from "../../supabase";
 import { handleError } from "../utils/helpers";
 import { getProductName } from "./apiProducts";
 
-export async function submitOrder(orderItem) {
-  const { data, error } = await supabase.from("orders").insert([orderItem]).select();
-  handleError(error);
-}
-
 export async function getOrderCartWithProductNames(cartArray) {
   const cartWithNames = await Promise.all(
     cartArray.map(async (item) => {
@@ -16,4 +11,16 @@ export async function getOrderCartWithProductNames(cartArray) {
   );
 
   return cartWithNames;
+}
+
+export async function submitOrder(orderItem) {
+  const { error } = await supabase.from("orders").insert([orderItem]).select();
+  handleError(error);
+}
+
+export async function getUserOrders(userId) {
+  const { data, error } = await supabase.from("orders").select("*").eq("user_id", userId);
+
+  handleError(error);
+  return data;
 }

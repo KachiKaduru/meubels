@@ -48,7 +48,7 @@ export async function action({ request }) {
   const data = Object.fromEntries(formData);
   const cart = JSON.parse(data.cart);
 
-  if (!userId) return redirect("/signup");
+  if (!userId) return redirect("/login");
 
   syncCartWithSupabase(cart, userId);
 

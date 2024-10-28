@@ -14,6 +14,8 @@ import Display from "../../ui/Display";
 import Layout from "../../ui/Layout";
 import Mastercard from "../../ui/Mastercard";
 import DhlCard from "../../ui/DhlCard";
+import store from "../../store";
+import { clearCart } from "../cart/cartSlice";
 
 const StyledCheckOut = styled(Layout)`
   .form {
@@ -75,29 +77,25 @@ export async function action({ request }) {
   const data = Object.fromEntries(formData);
 
   const cart = JSON.parse(data.cart);
-  // const priceList = JSON.parse(data.priceList);
-
-  // console.log(cart, priceList);
-
-  const orderItems = await getOrderCartWithProductNames(cart);
-  // console.log(orderItems);
 
   const orderId = generateOrderId();
+  const orderItems = await getOrderCartWithProductNames(cart);
 
   const newOrder = {
     order_id: orderId,
     user_id,
-    order_items: orderItems,
+    order_cart: orderItems,
     total_price: orderItems.reduce((total, item) => total + item.total_price, 0),
-    user_name: data.name,
+    user: data.name,
   };
 
-  // console.log(newOrder);
   submitOrder(newOrder);
 
-  cart.forEach((item) => deleteItemFromSupabaseCart(item.user_id, item.product_id));
+  cart.forEach((item) => {
+    deleteItemFromSupabaseCart(item.user_id, item.product_id);
+  });
+  store.dispatch(clearCart());
 
-  // return null;
   return redirect("/success");
 }
 
@@ -141,11 +139,6 @@ export default function CheckOut() {
         </Display>
 
         <div className="bottom">
-          <input
-            type="hidden"
-            name="priceList"
-            value={JSON.stringify({ totalCartPrice, orderPrice })}
-          />
           <input type="hidden" name="cart" value={JSON.stringify(userCart)} />
           <Button padding="large" uppercase={true}>
             Submit order

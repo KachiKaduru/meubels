@@ -8,15 +8,14 @@ import ErrorPage from "./pages/ErrorPage";
 import Home, { loader as homeLoader } from "./pages/Home";
 import Login, { action as loginAction } from "./pages/Login";
 import SignUp, { action as signupAction } from "./pages/SignUp";
+import Success, { loader as successLoader } from "./pages/Success";
 import Profile, { loader as profileLoader } from "./pages/Profile";
 import Cart, { action as cartAction, loader as cartLoader } from "./pages/Cart";
-
 import Product, { loader as productLoader } from "./features/products/Product";
 import CheckOut, {
   action as checkoutAction,
   loader as checkoutLoader,
 } from "./features/order/CheckOut";
-import Success from "./pages/Success";
 import Orders from "./features/user/Orders";
 
 const router = createBrowserRouter([
@@ -75,6 +74,7 @@ const router = createBrowserRouter([
       {
         path: "/success",
         element: <Success />,
+        loader: successLoader,
       },
       {
         path: "/orders",
