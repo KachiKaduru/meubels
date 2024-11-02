@@ -1,16 +1,20 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { getUserId } from "../../utils/helpers";
 import { getProfile } from "../../services/apiProfiles";
 import styled from "styled-components";
+import { HiLogout } from "react-icons/hi";
 
 import BarHeader from "../../ui/BarHeader";
 import BackButton from "../../ui/BackButton";
 import Display from "../../ui/Display";
 import Modal from "../../ui/Modal";
-import { useState } from "react";
 
 const StyledSettings = styled.div`
   position: relative;
+  .capitalize {
+    text-transform: capitalize;
+  }
 
   .personal-info,
   .logout {
@@ -26,6 +30,8 @@ const StyledSettings = styled.div`
         border-radius: 1rem;
         box-shadow: 0 0px 2rem 1px #c4c4c4;
         padding: 1rem;
+        display: grid;
+        gap: 0.5rem;
       }
 
       p {
@@ -42,6 +48,12 @@ const StyledSettings = styled.div`
       cursor: pointer;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      svg {
+        width: 2rem;
+        height: 2rem;
+        margin-left: 3rem;
+      }
     }
   }
 `;
@@ -83,7 +95,7 @@ export default function Settings() {
           <aside>
             <div>
               <p>Name</p>
-              <h4>{name}</h4>
+              <h4 className="capitalize">{name}</h4>
             </div>
 
             <div>
@@ -98,7 +110,7 @@ export default function Settings() {
           <aside>
             <div className="logout-div" onClick={handleOpen}>
               <h4>Logout</h4>
-              <span> &rarr;</span>
+              <HiLogout />
             </div>
           </aside>
         </div>

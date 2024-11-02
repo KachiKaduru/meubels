@@ -10,7 +10,8 @@ import Navbar from "../ui/Navbar";
 import Display from "../ui/Display";
 import store from "../store";
 import { getProfileEmail, getProfileName } from "../services/apiProfiles";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { getUserId } from "../utils/helpers";
 
 const Section = styled.section`
   display: flex;
@@ -29,13 +30,14 @@ export async function loader() {
     const userEmail = await getProfileEmail(user_id);
     return { username, userEmail };
   }
-  // return user_id;
 }
 
 export default function Profile() {
   const loaderData = useLoaderData();
   const username = loaderData?.username;
   const userEmail = loaderData?.userEmail;
+  const userId = getUserId();
+  const navigate = useNavigate();
 
   return (
     <section>
@@ -49,11 +51,26 @@ export default function Profile() {
         <Display>
           <UserDisplay username={username} userEmail={userEmail} />
 
-          <Section>
-            {profileSections.map((section) => (
-              <UserSection route={section.route} title={section.title} key={section.id} />
-            ))}
-          </Section>
+          {!userId ? (
+            <div>
+              <p>It seems you're not logged in yet 😢</p>
+              <p>
+                <Link to="/login">Log into your account here</Link>
+              </p>
+
+              <span>OR</span>
+
+              <p>
+                <Link to="/signup">Sign up if you don't have an account</Link>
+              </p>
+            </div>
+          ) : (
+            <Section>
+              {profileSections.map((section) => (
+                <UserSection route={section.route} title={section.title} key={section.id} />
+              ))}
+            </Section>
+          )}
         </Display>
 
         <Navbar />

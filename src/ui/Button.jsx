@@ -71,7 +71,7 @@ const StyledButton = styled.button`
   ${(props) => lengths[props.cover]}
   ${(props) => paddings[props.padding]} 
   ${(props) => props.uppercase && uppercase}
-  ${(props) => props.invert && invert}
+  ${(props) => props.invert && invert}  
   ${(props) => props.disabled && disabled}
 `;
 
@@ -85,11 +85,13 @@ export default function Button({
   route,
   onClick,
   disabled,
+  className,
 }) {
   //
   if (type === "link")
     return (
       <StyledLink
+        className={className}
         cover={cover}
         padding={padding}
         uppercase={uppercase}
@@ -103,6 +105,7 @@ export default function Button({
 
   return (
     <StyledButton
+      className={className}
       disabled={disabled}
       cover={cover}
       padding={padding}
