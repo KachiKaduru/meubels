@@ -16,7 +16,7 @@ import CheckOut, {
   action as checkoutAction,
   loader as checkoutLoader,
 } from "./features/order/CheckOut";
-import Orders from "./features/user/Orders";
+import Orders, { loader as ordersLoader } from "./features/user/Orders";
 import Settings, { loader as settingsLoader } from "./features/user/Settings";
 
 const router = createBrowserRouter([
@@ -81,6 +81,7 @@ const router = createBrowserRouter([
       {
         path: "profile/orders",
         element: <Orders />,
+        loader: ordersLoader,
       },
 
       {

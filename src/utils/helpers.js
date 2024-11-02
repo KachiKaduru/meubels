@@ -39,3 +39,16 @@ export function formatDate(dateString) {
     hour12: true, // AM/PM format
   }).format(date);
 }
+
+export const formatNumber = (number) => {
+  return new Intl.NumberFormat("en-US").format(number);
+};
+
+export const formatShortDate = (dateString) => {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short", // Abbreviated month name
+    day: "2-digit", // Day of the month with leading zero if needed
+    year: "numeric", // Full year
+  }).format(date);
+};

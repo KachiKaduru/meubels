@@ -6,7 +6,7 @@ import Layout from "../ui/Layout";
 import Display from "../ui/Display";
 import NotificationItem from "../ui/NotificationItem";
 import { getUserId } from "../utils/helpers";
-import { getUserOrders } from "../services/apiOrders";
+import { getSingleOrder, getUserOrders } from "../services/apiOrders";
 import { useLoaderData } from "react-router-dom";
 
 export async function loader() {
@@ -15,6 +15,7 @@ export async function loader() {
   if (!userId) return;
 
   const orders = await getUserOrders(userId);
+  // const singleOrder = await getSingleOrder()
   return { orders };
 }
 

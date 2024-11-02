@@ -1,11 +1,14 @@
 import BarHeader from "../../ui/BarHeader";
 import BackButton from "../../ui/BackButton";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import Display from "../../ui/Display";
 import OrderItem from "./OrderItem";
+import { getUserId } from "../../utils/helpers";
+import { getUserOrders } from "../../services/apiOrders";
+import Layout from "../../ui/Layout";
 
-const StyledOrder = styled.section`
+const StyledOrder = styled(Layout)`
   .container {
     display: flex;
     justify-content: space-between;
@@ -26,7 +29,16 @@ const StyledNavlink = styled(NavLink)`
   }
 `;
 
+export async function loader() {
+  const userId = getUserId();
+  const orders = await getUserOrders(userId);
+
+  return { orders };
+}
+
 export default function Orders() {
+  const { orders } = useLoaderData();
+
   return (
     <StyledOrder>
       <BarHeader>
@@ -42,8 +54,15 @@ export default function Orders() {
       </div>
 
       <Display>
-        <OrderItem />
-        <OrderItem />
+        {orders.map((item) => (
+          <OrderItem
+            key={item.id}
+            orderId={item.order_id}
+            cartOrder={item.order_cart}
+            totalPrice={item.total_price}
+            date={item.created_at}
+          />
+        ))}
       </Display>
     </StyledOrder>
   );

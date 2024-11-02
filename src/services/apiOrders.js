@@ -24,3 +24,11 @@ export async function getUserOrders(userId) {
   handleError(error);
   return data;
 }
+
+export async function getSingleOrder(orderId) {
+  const { data, error } = await supabase.from("orders").select("*").eq("order_id", orderId);
+  handleError(error);
+
+  const order = data[0];
+  return order;
+}

@@ -1,20 +1,23 @@
 import styled from "styled-components";
 import Button from "../../ui/Button";
+import { formatNumber, formatShortDate } from "../../utils/helpers";
 
 const StyledItem = styled.div`
-  box-shadow: 0 0 1rem 0.1rem #000;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
+  padding: 0.7rem;
+
+  section {
+    box-shadow: 0 0.4rem 1rem var(--grey-color);
+  }
 
   header {
-    padding: 1.5rem 1.5rem 1rem 2rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 2px solid #ddd;
 
     h4 {
-      /* font-size: 1.6rem; */
-      text-transform: capitalize;
       color: var(--primary-color);
     }
 
@@ -24,10 +27,11 @@ const StyledItem = styled.div`
   }
 
   .other {
-    padding: 1.5rem 1.5rem 2rem 2rem;
+    padding: 0.5rem 1rem 1rem;
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem 0;
+    grid-template-columns: 0.8fr 1.4fr;
+    gap: 1.5rem 0;
 
     .status {
       color: #27ae60;
@@ -36,27 +40,32 @@ const StyledItem = styled.div`
   }
 `;
 
-export default function OrderItem() {
+export default function OrderItem({ orderId, cartOrder, totalPrice, date }) {
+  const newDate = formatShortDate(date);
+  const totalQuantity = cartOrder.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <StyledItem>
-      <header>
-        <h4>order number</h4>
-        <p>date</p>
-      </header>
+      <section>
+        <header>
+          <h4>
+            ID: <em>{orderId}</em>
+          </h4>
+          <p>{newDate}</p>
+        </header>
 
-      <div className="other">
-        <p>
-          Quantity: <strong>02</strong>
-        </p>
-        <p>
-          Total Amount: <strong>$150</strong>
-        </p>
-        <Button cover="half" padding="small" type="link">
-          details
-        </Button>
-
-        <p className="status">delivered</p>
-      </div>
+        <div className="other">
+          <p>
+            Quantity: <strong>{totalQuantity}</strong>
+          </p>
+          <p>
+            Total Amount: <strong>$ {formatNumber(totalPrice)}</strong>
+          </p>
+          <Button cover="half" padding="small" type="link">
+            details
+          </Button>
+        </div>
+      </section>
     </StyledItem>
   );
 }
