@@ -6,7 +6,6 @@ const StyledSection = styled(Link)`
   text-decoration: none;
   color: var(--primary-color);
   padding: 0 1rem;
-  /* border: 1px solid var(--disabled-color); */
 
   div {
     box-shadow: 0 4px 1rem 1px #c4c4c4;

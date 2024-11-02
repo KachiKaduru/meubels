@@ -5,7 +5,7 @@ const defaultStyles = css`
   background: var(--primary-color);
   color: white;
   box-shadow: 0px 10px 20px 0px #30303040;
-  font-family: "Poppins";
+  font-family: "Nunito sans", sans-serif;
   font-weight: 500;
   text-align: center;
   border-radius: 0.8rem;
