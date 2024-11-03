@@ -4,8 +4,7 @@ import { handleError } from "../utils/helpers";
 import { updateUserId } from "../features/user/userSlice";
 import { addNewProfile } from "./apiProfiles";
 import { getCartItems } from "./apiCart";
-import { clearCart, updateCart } from "../features/cart/cartSlice";
-import { redirect } from "react-router-dom";
+import { clearCart, updateSupabaseCart } from "../features/cart/cartSlice";
 
 export async function signUp(userName, userEmail, userPassword) {
   const { data, error } = await supabase.auth.signUp({
@@ -14,7 +13,7 @@ export async function signUp(userName, userEmail, userPassword) {
   });
 
   handleError(error);
-  console.log("success", data);
+  console.log("success");
 
   localStorage.setItem("user_id", data.user.id);
   store.dispatch(updateUserId(data.user.id));
@@ -28,13 +27,15 @@ export async function login(userEmail, userPassword) {
   });
 
   handleError(error);
-  console.log("success", data);
+  console.log("success");
 
   localStorage.setItem("user_id", data.user.id);
   store.dispatch(updateUserId(data.user.id));
 
   const newCart = await getCartItems(data.user.id);
-  store.dispatch(updateCart(newCart));
+  store.dispatch(updateSupabaseCart(newCart));
+
+  return data;
 }
 
 export async function logout() {

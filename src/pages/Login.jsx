@@ -3,7 +3,7 @@ import LogoComponent from "../ui/LogoComponent";
 import AccountForm from "../features/authentication/AccountForm";
 import AccountHeading from "../ui/AccountHeading";
 import { login } from "../services/apiAuthentication";
-import { redirect, useActionData } from "react-router-dom";
+import { redirect, useActionData, useRouteError } from "react-router-dom";
 
 const StyledLogin = styled.section`
   height: 100dvh;
@@ -14,15 +14,20 @@ const StyledLogin = styled.section`
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-
   const { email, password } = data;
-  login(email, password);
 
-  return redirect("/");
+  const user = await login(email, password);
+
+  if (user) {
+    return redirect("/");
+  } else {
+    return null;
+  }
 }
 
-export default function Login() {
+export default function LoginError() {
   const formError = useActionData();
+  const loginError = useRouteError();
 
   return (
     <StyledLogin>
@@ -30,7 +35,7 @@ export default function Login() {
 
       <AccountHeading>welcome back!</AccountHeading>
 
-      <AccountForm type="login" formError={formError} />
+      <AccountForm type="login" formError={formError} loginError={loginError} />
     </StyledLogin>
   );
 }

@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import { HiOutlineTrash } from "react-icons/hi";
+import { Skeleton } from "@mui/material";
 
 import { getSingleProduct } from "../services/apiProducts";
 import { deleteItemFromCart } from "../services/apiCart";
 import { updateItemQuantity } from "../features/cart/cartSlice";
 
-import addToCartBtn from "../data/images/shopping-bag-icon.svg";
 import CurrentQuantity from "./CurrentQuantity";
+import addToCartBtn from "../data/images/shopping-bag-icon.svg";
 
 const StyledItem = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr 4rem;
   gap: 2rem;
   color: var(--primary-color);
+
+  .skeleton-other {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
 
   .imgContainer {
     width: 10rem;
@@ -90,8 +98,8 @@ const StyledItem = styled.div`
 
 export default function Item({ type = "cart", productId, productQuantity, productPrice }) {
   const dispatch = useDispatch();
-
   const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { image, name } = product;
 
   function setItemQuantity(newQuantity) {
@@ -100,9 +108,11 @@ export default function Item({ type = "cart", productId, productQuantity, produc
 
   useEffect(
     function () {
+      setIsLoading(true);
       async function getCartItem() {
         const item = await getSingleProduct(productId);
         if (item) setProduct(item);
+        setIsLoading(false);
       }
       getCartItem();
     },
@@ -110,37 +120,52 @@ export default function Item({ type = "cart", productId, productQuantity, produc
   );
 
   return (
-    <StyledItem>
-      <div className="imgContainer">
-        <img src={image} alt="" />
-      </div>
+    <>
+      {isLoading ? (
+        <StyledItem>
+          <Skeleton variant="rounded" height={100} />
+          <div className="skeleton-other">
+            <Skeleton variant="rounded" height={30} />
+            <Skeleton variant="rectangular" width={70} height={25} />
+            <Skeleton variant="rounded" height={28} width={110} />
+          </div>
 
-      <div className="other">
-        <span>
-          <p>{name}</p>
-          <h4>$ {productPrice}</h4>
-        </span>
+          <Skeleton variant="rounded" height={30} width={30} />
+        </StyledItem>
+      ) : (
+        <StyledItem>
+          <div className="imgContainer">
+            <img src={image} alt="" />
+          </div>
 
-        {type === "cart" && (
-          <CurrentQuantity
-            cartQuantity={productQuantity}
-            setOuterQuantity={setItemQuantity}
-            productId={productId}
-          />
-        )}
-      </div>
+          <div className="other">
+            <span>
+              <p>{name}</p>
+              <h4>$ {productPrice}</h4>
+            </span>
 
-      <aside>
-        <span className="delete" onClick={() => deleteItemFromCart(productId)}>
-          <HiOutlineTrash />
-        </span>
+            {type === "cart" && (
+              <CurrentQuantity
+                cartQuantity={productQuantity}
+                setOuterQuantity={setItemQuantity}
+                productId={productId}
+              />
+            )}
+          </div>
 
-        {type === "favorites" && (
-          <button className="add">
-            <img src={addToCartBtn} alt="add" />
-          </button>
-        )}
-      </aside>
-    </StyledItem>
+          <aside>
+            <span className="delete" onClick={() => deleteItemFromCart(productId)}>
+              <HiOutlineTrash />
+            </span>
+
+            {type === "favorites" && (
+              <button className="add">
+                <img src={addToCartBtn} alt="add" />
+              </button>
+            )}
+          </aside>
+        </StyledItem>
+      )}
+    </>
   );
 }

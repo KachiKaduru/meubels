@@ -16,7 +16,9 @@ const StyledLoading = styled.div`
   height: 100dvh;
   width: 100%;
   z-index: 9999;
-  backdrop-filter: blur(0.8rem);
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5);
 `;
 
 export default function LoadingPage() {

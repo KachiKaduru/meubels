@@ -1,18 +1,18 @@
 import styled from "styled-components";
-import img from "../../data/images/product-2.png";
+import img from "../../data/images/user-image.png";
 import { useState } from "react";
 
 const StyledUserDisplay = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
-  /* border: 1px solid red; */
-  padding: 1rem 0;
-  /* box-shadow: 0 0 1rem var(--grey-color); */
+  padding: 1rem 1rem;
 
   .imgContainer {
     width: 8rem;
     height: 8rem;
+    box-shadow: 0 0px 1rem 2px #ddd;
+    border-radius: 50%;
 
     img {
       width: 100%;
@@ -46,7 +46,6 @@ export default function UserDisplay({ username, userEmail }) {
 
       <div className="details">
         <h2> hello{`${name ? ` ${name}` : " there,"}`}</h2>
-        {/* <h2>Kachi Kaduru</h2> */}
         <p>{email}</p>
       </div>
     </StyledUserDisplay>

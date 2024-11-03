@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { getUserId, handleError } from "../utils/helpers";
+import { getUserId } from "../utils/helpers";
 import { updateSupabaseCartItem } from "../services/apiCart";
 
 const StyledDiv = styled.div`
@@ -28,13 +28,6 @@ export default function CurrentQuantity({ setOuterQuantity, cartQuantity, produc
   const [quantity, setQuantity] = useState(cartQuantity || 1);
   const user_id = getUserId();
 
-  // async function handleItemUpdate(productId, currentQuantity, change) {
-  //   if (!user_id) return;
-
-  //   const newQuantity = currentQuantity + change;
-  //   const result = await updateSupabaseCartItem(user_id, productId, newQuantity);
-  //   handleError(result.error);
-  // }
   function handleItemUpdate(diff) {
     if (!user_id) return;
 

@@ -1,9 +1,10 @@
+import { catchError } from "../features/user/userSlice";
 import store from "../store";
 
 export function handleError(error, name) {
   if (error) {
-    // console.error(error);
     console.log(error, name);
+    store.dispatch(catchError(error.message));
     throw new Error(error.message);
   }
 }

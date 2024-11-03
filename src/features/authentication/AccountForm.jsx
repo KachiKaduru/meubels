@@ -53,16 +53,7 @@ const StyledForm = styled(Form)`
     text-align: left;
   }
 `;
-export default function AccountForm({ type = "signup", formError }) {
-  // const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [conFirmPassword, setConfirmPassword] = useState("");
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  // }
-
+export default function AccountForm({ type = "signup", formError, loginError }) {
   return (
     <StyledForm method="POST">
       {type === "signup" && (
@@ -80,6 +71,7 @@ export default function AccountForm({ type = "signup", formError }) {
       <label htmlFor="">
         <legend>Password</legend>
         <input type="password" name="password" required />
+        {loginError ? <p className="error">{loginError.message}</p> : null}
       </label>
 
       {type === "signup" && (
