@@ -10,7 +10,7 @@ export default function Payments() {
     <StyledPayments>
       <BarHeader>
         <BackButton />
-        <span>Payment Method</span>
+        <h4>Payment Method</h4>
         <SearchComponent />
       </BarHeader>
     </StyledPayments>

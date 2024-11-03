@@ -1,12 +1,12 @@
-import BarHeader from "../../pages/BarHeader";
 import BackButton from "../../ui/BackButton";
+import BarHeader from "../../ui/BarHeader";
 
 export default function Addresses() {
   return (
     <div>
       <BarHeader>
         <BackButton />
-        <span>shipping Address</span>
+        <h4>shipping Address</h4>
       </BarHeader>
 
       <span>

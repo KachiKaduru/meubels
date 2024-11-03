@@ -18,6 +18,8 @@ import CheckOut, {
 } from "./features/order/CheckOut";
 import Orders, { loader as ordersLoader } from "./features/user/Orders";
 import Settings, { loader as settingsLoader } from "./features/user/Settings";
+import Addresses from "./features/user/Addresses";
+import Payments from "./features/user/Payments";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +91,14 @@ const router = createBrowserRouter([
         path: "profile/settings",
         element: <Settings />,
         loader: settingsLoader,
+      },
+      {
+        path: "profile/addresses",
+        element: <Addresses />,
+      },
+      {
+        path: "profile/payments",
+        element: <Payments />,
       },
     ],
   },

@@ -8,7 +8,7 @@ const StyledSection = styled(Link)`
   padding: 0 1rem;
 
   div {
-    box-shadow: 0 4px 1rem 1px #c4c4c4;
+    box-shadow: 0 7px 1rem 1px #c4c4c4;
     display: flex;
     justify-content: space-between;
     align-items: center;

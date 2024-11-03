@@ -6,15 +6,13 @@ import { useNavigate } from "react-router-dom";
 const StyledModal = styled.section`
   position: absolute;
   top: 0;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 100dvh;
   display: grid;
   place-content: center;
-
-  .green,
-  .red {
-  }
 
   .green {
     background-color: green;
