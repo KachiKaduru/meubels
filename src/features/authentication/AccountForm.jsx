@@ -7,6 +7,8 @@ const StyledForm = styled(Form)`
   flex-direction: column;
   gap: 2rem;
   padding: 2rem 0;
+  max-width: 70rem;
+  margin: auto;
 
   p {
     text-align: center;

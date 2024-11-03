@@ -16,8 +16,12 @@ import { getUserId } from "../utils/helpers";
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.8rem;
   margin-bottom: 2rem;
+
+  @media (min-width: 767px) {
+    gap: 2.5rem;
+  }
 `;
 
 export async function loader() {

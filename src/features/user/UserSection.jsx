@@ -16,6 +16,11 @@ const StyledSection = styled(Link)`
     border-radius: 0.5rem;
   }
 
+  section {
+    display: grid;
+    gap: 0.3rem;
+  }
+
   h4 {
     font-size: 1.8rem;
     text-transform: capitalize;
@@ -24,6 +29,20 @@ const StyledSection = styled(Link)`
   p {
     color: #808080;
     font-size: 1.2rem;
+  }
+
+  @media (min-width: 767px) {
+    h4 {
+      font-size: 2.2rem;
+    }
+
+    p {
+      font-size: 1.4rem;
+    }
+
+    img {
+      width: 2.8rem;
+    }
   }
 `;
 

@@ -4,6 +4,15 @@ import styled from "styled-components";
 
 const StyledBack = styled.div`
   cursor: pointer;
+  img {
+    width: 2rem;
+  }
+
+  @media (min-width: 767px) {
+    img {
+      width: 2.5rem;
+    }
+  }
 `;
 
 export default function BackButton({ className }) {

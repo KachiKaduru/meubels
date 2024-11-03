@@ -6,22 +6,20 @@ import Layout from "../ui/Layout";
 import Display from "../ui/Display";
 import NotificationItem from "../ui/NotificationItem";
 import { getUserId } from "../utils/helpers";
-import { getSingleOrder, getUserOrders } from "../services/apiOrders";
-import { useLoaderData } from "react-router-dom";
+import { getUserOrders } from "../services/apiOrders";
+import { redirect, useLoaderData } from "react-router-dom";
 
 export async function loader() {
   const userId = getUserId();
 
-  if (!userId) return;
+  if (!userId) return redirect("/");
 
   const orders = await getUserOrders(userId);
-  // const singleOrder = await getSingleOrder()
   return { orders };
 }
 
 export default function Notifications() {
   const { orders } = useLoaderData();
-  // console.log(orders);
 
   return (
     <section>

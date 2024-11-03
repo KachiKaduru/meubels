@@ -14,7 +14,7 @@ import Layout from "../ui/Layout";
 import Display from "../ui/Display";
 import Navbar from "../ui/Navbar";
 
-const Bottom = styled.footer`
+const Footer = styled.footer`
   padding: 1rem 0.5rem;
   border-top: 1px solid var(--grey-color);
   display: grid;
@@ -64,14 +64,14 @@ export default function Cart() {
 
   return (
     <section>
-      <Layout>
+      <Layout type="cart">
         <BarHeader>
           <BackButton />
           <h4>My cart</h4>
         </BarHeader>
 
         <Display>
-          {cart.length < 1 && <p>No items in your cart yet!</p>}
+          {cart.length < 1 && <p style={{ textAlign: "center" }}>No items in your cart yet!</p>}
 
           {cart.map((item) => (
             <Item
@@ -82,8 +82,9 @@ export default function Cart() {
             />
           ))}
         </Display>
-        {cart.length > 0 ? (
-          <Bottom>
+
+        {cart.length > 0 && (
+          <Footer>
             <aside className="total">
               <h3>Total: </h3>
               <h3 className="price">$ {totalCartPrice}.00 </h3>
@@ -93,10 +94,10 @@ export default function Cart() {
               <input type="hidden" name="cart" value={JSON.stringify(cart)} />
               <Button padding="large">Check out</Button>
             </Form>
-          </Bottom>
-        ) : (
-          <Navbar />
+          </Footer>
         )}
+
+        <Navbar />
       </Layout>
     </section>
   );

@@ -9,7 +9,7 @@ const StyledNotification = styled.div`
   padding: 0 0.5rem;
 
   section {
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 1rem;
     display: grid;
     grid-template-columns: 5rem 1fr;
     gap: 1rem;
@@ -45,6 +45,15 @@ const StyledNotification = styled.div`
     .date {
       align-self: end;
       font-style: oblique;
+    }
+  }
+
+  @media (min-width: 767px) {
+    .details h4 {
+      font-size: 1.6rem;
+    }
+    .details p {
+      font-size: 1.3rem;
     }
   }
 `;

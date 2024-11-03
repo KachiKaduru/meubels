@@ -4,16 +4,37 @@ const StyledLayout = styled.section`
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100dvh;
-  /* overflow-y: scroll; */
 
-  /* @media (min-width: 767px) { */
-  /* background: red; */
-  /* grid-template-columns: 20rem 1fr; */
-  /* grid-template-rows: auto 1fr; */
-  /* gap: 2rem; */
-  /* } */
+  @media (min-width: 767px) {
+    grid-template-columns: 15rem 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+  }
 `;
 
-export default function Layout({ children, className }) {
-  return <StyledLayout className={className}>{children}</StyledLayout>;
+const StyledLayoutCart = styled.section`
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100dvh;
+
+  @media (min-width: 767px) {
+    grid-template-columns: 15rem 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+  }
+`;
+
+export default function Layout({ children, className, type = "normal" }) {
+  if (type === "cart")
+    return (
+      <StyledLayoutCart type={type} className={className}>
+        {children}
+      </StyledLayoutCart>
+    );
+
+  return (
+    <StyledLayout className={className} type={type}>
+      {children}
+    </StyledLayout>
+  );
 }

@@ -26,9 +26,7 @@ html {
 body {
   font-size: 1.6rem;
   font-family: "Nunito Sans", sans-serif;
-  width: 37.5rem;
-  /* min-width: 36rem; */
-  /* max-width: 76.7rem; */
+  /* width: 37.5rem; */
   margin: auto;
   border: 1px solid red;
 }

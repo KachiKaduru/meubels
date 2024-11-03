@@ -16,6 +16,12 @@ const StyledBar = styled.div`
     font-family: "Merriweather", serif;
     text-transform: capitalize;
   }
+
+  @media (min-width: 767px) {
+    h4 {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export default function BarHeader({ children, className }) {

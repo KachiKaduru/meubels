@@ -42,6 +42,7 @@ export default function Home() {
           </Div>
           <FavoritesComponent />
         </BarHeader>
+
         <Display>
           <ProductsDisplay products={products} />
         </Display>

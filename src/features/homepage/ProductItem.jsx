@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import img1 from "../../data/images/product-1.png";
 import { useNavigate } from "react-router-dom";
 
 const StyledItem = styled.div`
@@ -13,6 +12,20 @@ const StyledItem = styled.div`
 
   div {
     border: 1px solid #ddd;
+  }
+
+  @media (min-width: 767px) {
+    img {
+      height: 24rem;
+    }
+
+    p {
+      font-size: 1.8rem;
+    }
+
+    h4 {
+      font-size: 1.8rem;
+    }
   }
 `;
 
@@ -30,7 +43,7 @@ export default function ProductItem({ item }) {
 
       <div>
         <p>{name}</p>
-        <h4>$ {price}</h4>
+        <h4>$ {price}.00</h4>
       </div>
     </StyledItem>
   );

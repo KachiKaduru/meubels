@@ -32,6 +32,23 @@ const StyledUserDisplay = styled.div`
       font-size: 1.4rem;
     }
   }
+
+  @media (min-width: 767px) {
+    justify-content: center;
+    gap: 3rem;
+
+    .imgContainer {
+      width: 9rem;
+      height: 9rem;
+    }
+
+    .details h2 {
+      font-size: 2.4rem;
+    }
+    .details p {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 export default function UserDisplay({ username, userEmail }) {
@@ -45,7 +62,7 @@ export default function UserDisplay({ username, userEmail }) {
       </div>
 
       <div className="details">
-        <h2> hello{`${name ? ` ${name}` : " there,"}`}</h2>
+        <h2> hello{`${name ? `, ${name}` : " there,"}`}</h2>
         <p>{email}</p>
       </div>
     </StyledUserDisplay>
