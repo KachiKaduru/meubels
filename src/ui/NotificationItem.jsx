@@ -7,6 +7,7 @@ import successBag from "../data/images/success-bag.png";
 
 const StyledNotification = styled.div`
   padding: 0 0.5rem;
+  cursor: pointer;
 
   section {
     padding: 0.2rem 1rem;
