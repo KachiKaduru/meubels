@@ -7,7 +7,7 @@ import Display from "../ui/Display";
 import NotificationItem from "../ui/NotificationItem";
 import { getUserId } from "../utils/helpers";
 import { getUserOrders } from "../services/apiOrders";
-import { redirect, useLoaderData } from "react-router-dom";
+import { redirect, useLoaderData, useNavigate } from "react-router-dom";
 
 export async function loader() {
   const userId = getUserId();
@@ -20,6 +20,11 @@ export async function loader() {
 
 export default function Notifications() {
   const { orders } = useLoaderData();
+  const navigate = useNavigate();
+
+  function showDetails(id) {
+    navigate(`/profile/orders/${id}`);
+  }
 
   return (
     <section>
@@ -36,7 +41,12 @@ export default function Notifications() {
           )}
 
           {orders.map((item) => (
-            <NotificationItem orderId={item.order_id} key={item.id} orderDate={item.created_at} />
+            <NotificationItem
+              orderId={item.order_id}
+              key={item.id}
+              orderDate={item.created_at}
+              onClick={() => showDetails(item.order_id)}
+            />
           ))}
         </Display>
         <Navbar />

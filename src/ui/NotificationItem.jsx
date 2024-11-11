@@ -58,7 +58,7 @@ const StyledNotification = styled.div`
   }
 `;
 
-export default function NotificationItem({ orderId, orderDate }) {
+export default function NotificationItem({ orderId, orderDate, onClick }) {
   const date = formatDate(orderDate);
   const [cartOrder, setCartOrder] = useState([]);
   const totalQuantity = cartOrder.reduce((total, item) => total + item.quantity, 0);
@@ -77,7 +77,7 @@ export default function NotificationItem({ orderId, orderDate }) {
   );
 
   return (
-    <StyledNotification>
+    <StyledNotification onClick={onClick}>
       <section>
         <div className="imgContainer">
           <img src={successBag} alt="" />

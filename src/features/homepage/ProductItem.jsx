@@ -12,6 +12,20 @@ const StyledItem = styled.div`
 
   div {
     border: 1px solid #ddd;
+
+    p {
+      /* font-size: 1.8rem; */
+      /* border: 1px solid red; */
+      /* font-weight: 600; */
+
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      overflow: hidden;
+      /* text-overflow: ellipsis; */
+      /* white-space: normal; */
+    }
   }
 
   @media (min-width: 767px) {
