@@ -26,15 +26,14 @@ html {
 body {
   font-size: 1.6rem;
   font-family: "Nunito Sans", sans-serif;
-  /* width: 37.5rem; */
+  min-width: 32rem;
   margin: auto;
-  border: 1px solid red;
 }
 
 nav{
   /* background-color: green; */
 
-  /* @media (min-width: 767px) { */
+  /* @media (min-width: var(--tablet)) { */
     /* grid-row: 1/-1; */
     /* grid-column: 1/2; */
   /* } */

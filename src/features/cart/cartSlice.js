@@ -15,7 +15,7 @@ const cartSlice = createSlice({
     updateCart(state, action) {
       state.cart = [...state.cart, action.payload];
     },
-    updateSupabaseCart(state, action) {
+    updateCartWithSupabaseCart(state, action) {
       state.cart = [...state.cart, ...action.payload];
     },
     updateItemQuantity(state, action) {
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
 export const {
   updateTotalCartPrice,
   updateCart,
-  updateSupabaseCart,
+  updateCartWithSupabaseCart,
   updateItemQuantity,
   deleteItem,
   clearCart,

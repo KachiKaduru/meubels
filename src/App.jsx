@@ -20,6 +20,7 @@ import Orders, { loader as ordersLoader } from "./features/user/Orders";
 import Settings, { loader as settingsLoader } from "./features/user/Settings";
 import Addresses from "./features/user/Addresses";
 import Payments from "./features/user/Payments";
+import OrderDetails, { loader as orderDetailsLoader } from "./features/order/OrderDetails";
 
 const router = createBrowserRouter([
   {
@@ -86,7 +87,11 @@ const router = createBrowserRouter([
         element: <Orders />,
         loader: ordersLoader,
       },
-
+      {
+        path: "profile/orders/:orderID",
+        element: <OrderDetails />,
+        loader: orderDetailsLoader,
+      },
       {
         path: "profile/settings",
         element: <Settings />,

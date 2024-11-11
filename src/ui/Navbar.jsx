@@ -111,6 +111,7 @@ const StyledNavLink = styled(NavLink)`
 export default function Navbar({ className }) {
   const cart = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.user);
+  const orders = useSelector((state) => state.order.orders);
   const userId = user.user_id;
 
   return (
@@ -139,6 +140,7 @@ export default function Navbar({ className }) {
             {({ isActive }) => (
               <>
                 {isActive ? <HiBell /> : <HiOutlineBell />}
+                {orders.length > 0 && <span>{orders.length}</span>}
                 <p className="icon-name">Notifications</p>
               </>
             )}

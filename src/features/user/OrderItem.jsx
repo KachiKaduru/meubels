@@ -61,7 +61,7 @@ export default function OrderItem({ orderId, cartOrder, totalPrice, date }) {
           <p>
             Total Amount: <strong>$ {formatNumber(totalPrice)}</strong>
           </p>
-          <Button cover="half" padding="small" type="link">
+          <Button cover="half" padding="small" type="link" route={orderId}>
             details
           </Button>
         </div>
