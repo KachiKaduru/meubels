@@ -24,9 +24,8 @@ const StyledProduct = styled.div`
 
   .imgContainer {
     position: relative;
-    /* width: 100%; */
     height: 45rem;
-    /* border: 1px solid red; */
+    /* width: 100%; */
 
     .img {
       height: 100%;
@@ -89,6 +88,14 @@ const StyledProduct = styled.div`
       }
     }
   }
+
+  .product {
+    @media (min-width: 767px) {
+      flex-direction: unset;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 `;
 
 export async function loader({ params }) {
@@ -113,7 +120,7 @@ export default function Product() {
 
   return (
     <StyledProduct>
-      <Display>
+      <Display className="product">
         <div className="imgContainer">
           <BackButton className="top" />
           <img src={image} alt="" className="img" />

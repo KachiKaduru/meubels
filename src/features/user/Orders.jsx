@@ -10,9 +10,6 @@ import Layout from "../../ui/Layout";
 
 const StyledOrder = styled(Layout)`
   .container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
   }
 `;
 
@@ -40,7 +37,7 @@ export default function Orders() {
   const { orders } = useLoaderData();
 
   return (
-    <StyledOrder>
+    <Layout>
       <BarHeader>
         <BackButton />
         <h4>my order</h4>
@@ -64,6 +61,6 @@ export default function Orders() {
           />
         ))}
       </Display>
-    </StyledOrder>
+    </Layout>
   );
 }

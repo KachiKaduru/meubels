@@ -30,13 +30,20 @@ body {
   margin: auto;
 }
 
-nav{
-  /* background-color: green; */
+.container{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 
-  /* @media (min-width: var(--tablet)) { */
-    /* grid-row: 1/-1; */
-    /* grid-column: 1/2; */
-  /* } */
+  @media (min-width: 767px) {
+    grid-row: 1/-1;
+    grid-column: 1/2;
+
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10rem 0;
+  }
 }
 
 `;

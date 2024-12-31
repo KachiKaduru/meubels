@@ -49,6 +49,7 @@ export default function Notifications() {
             />
           ))}
         </Display>
+
         <Navbar />
       </Layout>
     </section>
