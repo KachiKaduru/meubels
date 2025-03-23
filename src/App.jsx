@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
+import "../src/index.css";
 
 import AppLayout from "./ui/AppLayout";
 import Notifications, { loader as notificationLoader } from "./pages/Notifications";

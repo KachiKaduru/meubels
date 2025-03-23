@@ -15,7 +15,6 @@ const StyledDiv = styled.div`
 export default function ProductsDisplay({ products }) {
   return (
     <>
-      <h2>display</h2>
       <StyledDiv>
         {products?.map((item) => (
           <ProductItem key={item.id} item={item} />
