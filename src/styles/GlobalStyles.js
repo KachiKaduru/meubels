@@ -35,7 +35,7 @@ body {
   justify-content: space-between;
   margin-bottom: 2rem;
 
-  @media (min-width: 767px) {
+  /* @media (min-width: 767px) {
     grid-row: 1/-1;
     grid-column: 1/2;
 
@@ -43,7 +43,7 @@ body {
     justify-content: space-around;
     align-items: center;
     padding: 10rem 0;
-  }
+  } */
 }
 
 `;

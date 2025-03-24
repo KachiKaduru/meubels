@@ -15,10 +15,10 @@ import { HiOutlineBell } from "react-icons/hi2";
 import { HiBell } from "react-icons/hi2";
 
 const StyledNav = styled.nav`
-  @media (min-width: 767px) {
+  /* @media (min-width: 767px) {
     grid-row: 1/-1;
     grid-column: 1/2;
-  }
+  } */
 `;
 
 const StyledUl = styled.ul`
@@ -28,17 +28,17 @@ const StyledUl = styled.ul`
   padding: 2rem 2rem 3rem;
   box-shadow: 0 -0.3rem 1rem 1px #ddd;
 
-  @media (min-width: 430px) {
+  /* @media (min-width: 430px) {
     justify-content: space-around;
-  }
+  } */
 
-  @media (min-width: 767px) {
+  /* @media (min-width: 767px) {
     flex-direction: column;
     gap: 2rem;
     height: 100dvh;
     align-items: unset;
     justify-content: space-around;
-  }
+  } */
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -93,7 +93,7 @@ const StyledNavLink = styled(NavLink)`
 
   @media (min-width: 767px) {
     /* width: 3.5rem; */
-    width: 100%;
+    /* width: 100%;
     height: 3.5rem;
 
     span {
@@ -104,7 +104,7 @@ const StyledNavLink = styled(NavLink)`
 
     .icon-name {
       display: block;
-    }
+    } */
   }
 `;
 

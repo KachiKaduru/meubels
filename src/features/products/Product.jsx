@@ -89,12 +89,14 @@ const StyledProduct = styled.div`
     }
   }
 
+  @media (min-width: 767px) {
+  }
   .product {
-    @media (min-width: 767px) {
+    /* @media (min-width: 767px) {
       flex-direction: unset;
       display: grid;
       grid-template-columns: 1fr 1fr;
-    }
+    } */
   }
 `;
 
@@ -119,9 +121,9 @@ export default function Product() {
   }
 
   return (
-    <StyledProduct>
+    <StyledProduct className="">
       <Display className="product">
-        <div className="imgContainer">
+        <div className="imgContainer md:row-span-2">
           <BackButton className="top" />
           <img src={image} alt="" className="img" />
         </div>

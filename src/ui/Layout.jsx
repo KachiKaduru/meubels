@@ -5,11 +5,11 @@ const StyledLayout = styled.section`
   grid-template-rows: auto 1fr auto;
   height: 100dvh;
 
-  @media (min-width: 767px) {
+  /* @media (min-width: 767px) {
     grid-template-columns: 15rem 1fr;
     grid-template-rows: auto 1fr;
     gap: 2rem;
-  }
+  } */
 `;
 
 const StyledLayoutCart = styled.section`
@@ -17,11 +17,11 @@ const StyledLayoutCart = styled.section`
   grid-template-rows: auto 1fr auto;
   height: 100dvh;
 
-  @media (min-width: 767px) {
+  /* @media (min-width: 767px) {
     grid-template-columns: 15rem 1fr;
     grid-template-rows: auto 1fr auto;
     gap: 2rem;
-  }
+  } */
 `;
 
 export default function Layout({ children, className, type = "normal" }) {
